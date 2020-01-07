@@ -1,0 +1,83 @@
+<template>
+ 
+    <div>
+      <v-toolbar color="orange darken-1" dark >
+        <v-toolbar-title>  <router-link :to="{name: 'home'}" tag="button">
+            <v-btn text > Logo</v-btn>
+          </router-link>
+         
+        </v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-toolbar-items>
+          <v-btn text>Catalogo</v-btn>
+          <v-btn text>Galeria</v-btn>
+          <v-btn text>Sobre</v-btn>
+          <buttonModalLogin v-if="getLoggedUser().id==-1"></buttonModalLogin>
+          <!--<buttonModalRegister v-if="getLoggedUser().id==-1"></buttonModalRegister>-->
+
+          <v-menu offset-y v-if="getLoggedUser().id!=-1">
+            <template v-slot:activator="{ on }">
+              <v-btn text v-on="on">
+                <v-icon>mdi-account</v-icon>
+                <v-icon>mdi-menu-down</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item>
+                <v-list-item-title>
+                  <v-btn text>Perfil</v-btn>
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>
+                  <v-btn text>Meus Pedidos</v-btn>
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>
+                  <v-btn text v-on:click="logout()">Log Out</v-btn>
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-toolbar-items>
+      </v-toolbar>
+    </div>
+ 
+</template>
+
+
+<script>
+import buttonModalLogin from "./buttonModalLogin";
+//import buttonModalRegister from "./buttonModalRegister";
+export default {
+  components: {
+    buttonModalLogin,
+    //buttonModalRegister
+  },
+
+  data() {
+    return {
+      //loggedUser:this.$store.getters.getLoggedUser,
+    };
+  },
+  beforeCreate: function() {
+    this.loggedUser = this.$store.getters.getLoggedUser;
+  },
+  updated: function() {
+    this.loggedUser = this.$store.getters.getLoggedUser;
+  },
+  computed: {},
+  methods: {
+    logout() {
+      this.$store.commit("LOGOUT");
+    },
+    getLoggedUser() {
+      return this.$store.getters.getLoggedUser;
+    }
+  }
+};
+</script>
