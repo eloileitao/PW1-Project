@@ -5,14 +5,14 @@
     </template>
 
     <v-card class="elevation-12">
-      <v-toolbar color="orange darken-1" dark >
+      <v-toolbar color="orange darken-1" dark>
         <v-toolbar-title>Login</v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-          <v-spacer></v-spacer>
-      <v-card-text >
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-card-text>
         <v-form class="flex mb-0">
           <v-text-field
             label="Username"
@@ -51,6 +51,7 @@
 
 <script>
 import buttonModalRegister from "./buttonModalRegister";
+import Swal from "sweetalert2";
 
 export default {
   components: {
@@ -72,8 +73,15 @@ export default {
           "SET_LOGGED_USER",
           this.$store.getters.getLogin(this.username, this.password)
         );
+        Swal.fire({
+          title: "Login efetuado com sucesso!",
+          icon: "success"
+        });
       } else {
-        alert("User Invalido");
+         Swal.fire({
+          title: "Dados incorretos!",
+          icon: "error"
+        });
       }
     }
   }
