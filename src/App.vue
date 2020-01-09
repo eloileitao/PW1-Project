@@ -1,13 +1,10 @@
 <template>
   <v-app style="{ backgroundColor: white}">
-    
-   <!--<Navbar />-->
-   <!--<paralax/>-->
+    <!--<Navbar />-->
+    <!--<paralax/>-->
     <router-view></router-view>
 
-    <v-content>
-     
-    </v-content>
+    <v-content></v-content>
   </v-app>
 </template>
 
@@ -17,34 +14,24 @@
 //import paralax from"./components/paralax"
 
 export default {
-  name: "App",
-
-  components: {
-    //HelloWorld,
-    //Navbar,
-    //paralax,
-  },
   beforeDestroy() {
- 
-     if (localStorage.getItem("users") == null) {
-      localStorage.setItem("users", JSON.stringify(this.$store.state.users))
-     }
-
-  //   if (localStorage.getItem("requisitions") == null) {
-  //     localStorage.setItem("requisitions", JSON.stringify(this.$store.state.requisitions))
-
-
-   },
-   created() {
-    
-
-    this.$store.state.users = JSON.parse(localStorage.getItem("users"))
-   },
-
-
-  data: () => ({
-    //
-  })
+    localStorage.setItem("users", JSON.stringify(this.$store.state.users));
+  
+  },
+  created() {
+    window.addEventListener(
+      "beforeunload",
+      () => {
+        //console.log("closed");
+        localStorage.setItem("users", JSON.stringify(this.$store.state.users));
+      },
+      false
+    );
+    if (localStorage.getItem("users") !== null) {
+      this.$store.state.users = JSON.parse(localStorage.getItem("users"));
+      
+    }
+  }
 };
 </script>
 
