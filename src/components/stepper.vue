@@ -74,12 +74,6 @@ export default {
   created() {
     this.services = this.$store.getters.getServices;
   }
-  //this.$store.getters.getServices
-  /*
-  methods:{
-    getLoggedUser(){
-
-    }
-  }*/
+ 
 };
 </script>

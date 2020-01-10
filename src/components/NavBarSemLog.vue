@@ -26,21 +26,36 @@
             </template>
 
             <v-list>
-              <v-list-item>
-                <v-list-item-title>
+              <v-list-item v-if="getLoggedUser().type==3">
+                <v-list-item-title >
                   <v-btn text>Perfil</v-btn>
                 </v-list-item-title>
               </v-list-item>
-              <v-list-item>
+              <v-list-item v-if="getLoggedUser().type==3">
                 <v-list-item-title>
                   <v-btn text>Meus Pedidos</v-btn>
                 </v-list-item-title>
               </v-list-item>
-              <!-- <v-list-item>
+              <v-list-item v-if="getLoggedUser().type==1">
                 <v-list-item-title>
                   <v-btn text>Gestão de Users</v-btn>
                 </v-list-item-title>
-              </v-list-item> -->
+              </v-list-item> 
+              <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
+                <v-list-item-title>
+                  <v-btn text>Gestão de Pedidos</v-btn>
+                </v-list-item-title>
+              </v-list-item> 
+               <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
+                <v-list-item-title>
+                  <v-btn text>Gestão de Serviços</v-btn>
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
+                <v-list-item-title>
+                  <v-btn text>Gestão de Menus</v-btn>
+                </v-list-item-title>
+              </v-list-item>
               <v-list-item>
                 <v-list-item-title>
                   <v-btn text v-on:click="logout()">Log Out</v-btn>

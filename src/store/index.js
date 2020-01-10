@@ -5,7 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    users:[],
+    users:[
+     
+  ],
     loggedUser:{id:-1},
     requests:[
       {
@@ -33,7 +35,8 @@ export default new Vuex.Store({
         imgLink:"https://cdn.vuetifyjs.com/images/cards/kitchen.png",
 
       }
-    ]
+    ],
+
   },
   mutations: {
     REGISTER: (state,paylod)=>{state.users.push({
@@ -42,6 +45,7 @@ export default new Vuex.Store({
       password:paylod.password,
       email:paylod.email,
       foto:paylod.foto,
+      type:paylod.type
     
 
     })},

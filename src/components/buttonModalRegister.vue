@@ -76,6 +76,8 @@ data() {
         password:this.password,
         email:this.email,
         foto:"",
+        type:3,
+
 
 
         })}

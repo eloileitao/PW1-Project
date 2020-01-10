@@ -29,7 +29,8 @@ export default {
     );
     if (localStorage.getItem("users") !== null) {
       this.$store.state.users = JSON.parse(localStorage.getItem("users"));
-      
+      console.log("Created function")
+   //
     }
   }
 };
