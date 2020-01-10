@@ -8,7 +8,12 @@ export default new Vuex.Store({
     menus:{
 
   },
-    users:[
+    users:[{
+      id:0,
+      username:"admin",
+      password:"123",
+      type:1
+    }
      
   ],
     loggedUser:{id:-1},
