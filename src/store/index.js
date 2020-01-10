@@ -7,7 +7,13 @@ export default new Vuex.Store({
   state: {
     users:[],
     loggedUser:{id:-1},
-    requests:[],
+    requests:[
+      {
+      id: 1,
+      user_id: 1,
+      user_name: "user1",
+    },
+  ],
     services:[
       {
         id:0,

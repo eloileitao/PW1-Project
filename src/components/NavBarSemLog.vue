@@ -36,6 +36,11 @@
                   <v-btn text>Meus Pedidos</v-btn>
                 </v-list-item-title>
               </v-list-item>
+              <!-- <v-list-item>
+                <v-list-item-title>
+                  <v-btn text>Gestão de Users</v-btn>
+                </v-list-item-title>
+              </v-list-item> -->
               <v-list-item>
                 <v-list-item-title>
                   <v-btn text v-on:click="logout()">Log Out</v-btn>
