@@ -15,7 +15,7 @@
 
 export default {
   beforeDestroy() {
-    localStorage.setItem("users", JSON.stringify(this.$store.state.users));
+   localStorage.setItem("users", JSON.stringify(this.$store.state.users));
   
   },
   created() {
@@ -27,7 +27,7 @@ export default {
       },
       false
     );
-    if (localStorage.getItem("users") !== null) {
+    if (localStorage.getItem("users") != null) {
       this.$store.state.users = JSON.parse(localStorage.getItem("users"));
       console.log("Created function")
    //
