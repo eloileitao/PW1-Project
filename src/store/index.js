@@ -7,7 +7,27 @@ export default new Vuex.Store({
   state: {
     users:[],
     loggedUser:{id:-1},
-    requests:[]
+    requests:[],
+    services:[
+      {
+        id:0,
+        name:"Pequeno Almoço",
+        imgLink:"https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+
+      },
+      {
+        id:2,
+        name:"Coffe Break",
+        imgLink:"https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+
+      },
+      {
+        id:3,
+        name:"Buffet",
+        imgLink:"https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+
+      }
+    ]
   },
   mutations: {
     REGISTER: (state,paylod)=>{state.users.push({
@@ -37,7 +57,11 @@ export default new Vuex.Store({
     },
     getLoggedUser: (state)=>{
       return state.loggedUser;
+    },
+    getServices: (state)=>{
+      return state.services;
     }
+
   },
   actions: {},
   modules: {},
