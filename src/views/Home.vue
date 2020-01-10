@@ -15,7 +15,7 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from "@/components/HelloWorld.vue";
-
+//commite test
 import NavbarSemLog from "@/components/NavBarSemLog.vue";
 import hero from "@/components/hero.vue";
 import Footer from "@/components/footer.vue";
