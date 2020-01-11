@@ -99,9 +99,10 @@ export default {
   },
   data: function() {
     return {
+      filteredUsers: this.$store.state.users,
       users: this.$store.state.users,
       nameFilter: "",
-      filteredUsers: null,
+      
       username: ""
     };
   },
@@ -222,7 +223,6 @@ export default {
         let filterNameResult = false;
       for (let i = 0; i < this.users.length; i++) {
            this.username = this.users[i].username
-        console.log(this.users)
         let upperName = this.username.toUpperCase();
         let upperFilterName = this.nameFilter.toUpperCase();
 

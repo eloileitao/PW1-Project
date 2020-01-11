@@ -5,9 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    menus:{
+    menus: [{
 
-  },
+  }],
     users:[{
       id:0,
       username:"admin",
