@@ -1,6 +1,9 @@
 <template>
   <div class="about">
     <NavbarSemLog />
+    <div class="Div">
+      <h1 class="orange darken-3">Gestão de Utilizadores</h1>
+    </div>
     <div class="filterDiv">
         <div class="form-inline padding">
           <v-row>
@@ -47,6 +50,7 @@
         </td>
       </tr>
     </table>
+    <Footer ></Footer>
   </div>
 </template>
 
@@ -76,6 +80,11 @@ th {
   background-color: orange;
 }
 
+.Div {
+  color: white;
+  text-align: center;
+}
+
 .padding {
   padding-left: 5%;
   padding-right: 5%;
@@ -88,14 +97,20 @@ th {
 .marginBtn {
   margin-left: 20px;
 }
+
+Footer{
+  margin-top: 250px;
+}
 </style>
 
 <script>
 import NavbarSemLog from "@/components/NavBarSemLog.vue";
+import Footer from "@/components/footer.vue";
 import Swal from "sweetalert2";
 export default {
   components: {
-    NavbarSemLog
+    NavbarSemLog,
+    Footer
   },
   data: function() {
     return {

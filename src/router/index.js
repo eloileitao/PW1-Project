@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import About from "@/views/About.vue"
 import novoPedido from "@/views/novoPedido.vue";
 import UserBackOffice from "@/views/BackOffice/User.vue"
+import RequestsBackOffice from "@/views/BackOffice/Requests.vue"
 
 Vue.use(VueRouter);
 
@@ -30,7 +31,12 @@ const routes = [
    path: "/userbackoffices",
    name: "user-backoffice",
    component: UserBackOffice
-  }
+  },
+  {
+    path: "/requestbackoffices",
+    name: "request-backoffice",
+    component: RequestsBackOffice
+   }
 ];
 
 const router = new VueRouter({

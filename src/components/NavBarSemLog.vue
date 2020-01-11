@@ -43,7 +43,7 @@
               </v-list-item> 
               <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
                 <v-list-item-title>
-                  <v-btn text>Gestão de Pedidos</v-btn>
+                  <router-link :to="{name:'request-backoffice'}" tag="button"> <v-btn text>Gestão de Pedidos</v-btn></router-link>
                 </v-list-item-title>
               </v-list-item> 
                <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
