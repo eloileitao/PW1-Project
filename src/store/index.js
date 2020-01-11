@@ -78,7 +78,8 @@ export default new Vuex.Store({
     },
     getServices: (state)=>{
       return state.services;
-    }
+    },
+
 
   },
   actions: {},
