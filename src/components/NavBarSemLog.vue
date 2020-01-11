@@ -38,7 +38,7 @@
               </v-list-item>
               <v-list-item v-if="getLoggedUser().type==1">
                 <v-list-item-title>
-                  <v-btn text><router-link :to="{name:'user-backoffice'}">Gestão de Users</router-link></v-btn>
+                 <router-link :to="{name:'user-backoffice'}" tag="button"> <v-btn text>Gestão de Users</v-btn></router-link>
                 </v-list-item-title>
               </v-list-item> 
               <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
