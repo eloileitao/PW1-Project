@@ -104,7 +104,7 @@ export default new Vuex.Store({
         serviceName:payload.serviceName,
         menuName:payload.menuName,
         date:payload.date,
-        time:payload.date,
+        time:payload.time,
 
 
       })}
