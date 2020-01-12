@@ -1,6 +1,6 @@
 <template>
 
-  <v-hover v-slot:default="{ hover }">
+  <v-hover v-slot:default="{ hover }" >
     <v-card class="md-auto" color="grey lighten-4" height="150 px" outlined>
       <v-img :aspect-ratio="16/9" :src=image>
         <v-expand-transition>
@@ -8,6 +8,7 @@
             v-if="hover"
             class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
             style="height: 100%;"
+             
           >{{name}}</div>
         </v-expand-transition>
       </v-img>
@@ -40,7 +41,13 @@ export default {
 
   mounted() {
     console.log(this.image);
+  },
+
+  methods:{
+  
   }
+  
+
 };
 </script>
 
