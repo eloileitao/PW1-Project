@@ -7,25 +7,37 @@ export default new Vuex.Store({
   state: {
     menus: [{
       id: 0,
-      idServiço:0,
+      idServiço: 0,
       name: "Menu A",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
-      selected:false
+      selected: false
     },
     {
       id: 1,
-      idServiço:0,
+      idServiço: 0,
       name: "Menu B",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
-      selected:false
+      selected: false
     },
     {
       id: 2,
       name: "Menu C",
-      idServiço:0,
+      idServiço: 0,
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
-      selected:false
+      selected: false
     },],
+    vestuarios: [
+      {
+        id:0,
+        name: "Formal",
+        img: "https://i.pinimg.com/originals/a9/f3/d5/a9f3d5b95b612e63bb8c601aa0433612.jpg"
+      },
+      {
+        id:1,
+        name: "Informal",
+        img: "https://www.russums-shop.co.uk/files/uk/imagelibrary/subcategory/coloured-shirts.jpg"
+      }
+    ],
     users: [{
       id: 0,
       username: "admin",
@@ -62,21 +74,21 @@ export default new Vuex.Store({
         id: 0,
         name: "Pequeno Almoço",
         imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
-        selected:false,
+        selected: false,
 
       },
       {
         id: 2,
         name: "Coffe Break",
         imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
-        selected:false,
+        selected: false,
 
       },
       {
         id: 3,
         name: "Buffet",
         imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
-        selected:false,
+        selected: false,
 
       }
     ],
@@ -97,17 +109,19 @@ export default new Vuex.Store({
     },
     SET_LOGGED_USER: (state, paylod) => { state.loggedUser = paylod },
     LOGOUT: (state) => { state.loggedUser = { id: -1 } },
-    ADD_REQUEST: (state,payload) =>{
+    ADD_REQUEST: (state, payload) => {
       state.requests.push({
         id: payload.id,
-        userId:payload.userId,
-        serviceName:payload.serviceName,
-        menuName:payload.menuName,
-        date:payload.date,
-        time:payload.time,
+        userId: payload.userId,
+        serviceName: payload.serviceName,
+        menuName: payload.menuName,
+        date: payload.date,
+        time: payload.time,
+        vestuario: payload.vestuario
 
 
-      })}
+      })
+    }
   },
   getters: {
     getLogin: (state) => (username, password) => {
@@ -121,7 +135,7 @@ export default new Vuex.Store({
         lastId = state.users[state.users.length - 1].id + 1
       }
       return lastId
-    },getReqLastId: (state) => {
+    }, getReqLastId: (state) => {
       let lastId = 0
       if (state.requests.length > 0) {
         lastId = state.requests[state.requests.length - 1].id + 1
@@ -137,6 +151,10 @@ export default new Vuex.Store({
     getMenus: (state) => {
       return state.menus;
     },
+    getVestuarios: (state) => {
+      return state.vestuarios;
+    },
+
 
 
   },

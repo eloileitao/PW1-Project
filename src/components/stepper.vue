@@ -4,8 +4,8 @@
     <h1 style="text-align: center">Faça o seu pedido</h1>
 
     <br />
-    <v-stepper v-model="e1">
-      <v-stepper-header>
+    <v-stepper v-model="e1" >
+     <v-stepper-header >
         <v-stepper-step :complete="e1 > 1" step="1" @click="e1 = 1">
           <v-btn text>Tipo de Serviço</v-btn>
         </v-stepper-step>
@@ -19,18 +19,23 @@
         <v-divider></v-divider>
 
         <v-stepper-step step="3" @click="e1 = 3">
-          <v-btn text>Data, hora e tempo de duração</v-btn>
+          <v-btn text>Data e hora</v-btn>
+        </v-stepper-step>
+<v-divider></v-divider>
+
+        <v-stepper-step step="4" @click="e1 = 4">
+          <v-btn text>Vestuário</v-btn>
         </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <v-card class="mb-12">
-            <v-row justify="space-between">
+          <v-card class="mb-12" flat>
+            <v-row justify="space-between" >
               <v-col v-for="service in services" v-bind:key="service.id" md="3" class="ma-5">
                 <div v-bind:class="{selected:service.selected}">
                   <v-hover v-slot:default="{ hover }">
-                    <v-card color="grey lighten-4" height="150 px" outlined>
+                    <v-card color="grey lighten-4" height="150 px" outlined flat>
                       <v-img :aspect-ratio="16/9" :src="service.imgLink">
                         <div
                           v-if="hover || service.selected==true"
@@ -52,7 +57,7 @@
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <v-card class="mb-12">
+          <v-card class="mb-12" flat >
             <v-row justify="space-between">
               <v-col v-for="menu in menus" v-bind:key="menu.id" md="3" class="ma-5">
                 <div v-bind:class="{selected:menu.selected}">
@@ -79,7 +84,7 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <v-card class="mb-12">
+          <v-card class="mb-12" flat>
             <v-row>
               <v-col class="ma-5">
                 <v-date-picker
@@ -92,6 +97,34 @@
               </v-col>
               <v-col class="ma-5">
                 <v-time-picker v-model="timePicker" color="green lighten-1" full-width></v-time-picker>
+              </v-col>
+            </v-row>
+          </v-card>
+
+          <v-btn color="primary" @click="e1=4">Seguinte</v-btn>
+
+          <v-btn text>Cancel</v-btn>
+        </v-stepper-content>
+
+
+          <v-stepper-content step="4" flat>
+          <v-card class="mb-12" flat >
+            <v-row justify="space-between">
+              <v-col v-for="vestuario in vestuarios" v-bind:key="vestuario.id" md="3" class="ma-5">
+                <div v-bind:class="{selected:vestuario.selected}">
+                  <v-hover v-slot:default="{ hover }">
+                    <v-card color="grey lighten-4" height="150 px" outlined >
+                      <v-img :aspect-ratio="16/9" :src="vestuario.img" style="margin-top: 25px">
+                        <div
+                          v-if="hover || vestuario.selected==true"
+                          class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
+                          style="height: 100%;"
+                          v-on:click="setSelectedVestuario(vestuario.id)"
+                        >{{vestuario.name}}</div>
+                      </v-img>
+                    </v-card>
+                  </v-hover>
+                </div>
               </v-col>
             </v-row>
           </v-card>
@@ -123,17 +156,22 @@ export default {
     return {
       services: [],
       menus: [],
+      vestuarios:[],
       e1: 0,
       datePicker: new Date().toISOString().substr(0, 10),
       timePicker: null,
       request: null,
       selectedMenu: null,
       selectedService:null,
+      selectedVestuario:null,
     };
   },
   created() {
     this.services = this.$store.getters.getServices;
-    this.menus = this.$store.getters.getMenus;
+    this.allMenusStore = this.$store.getters.getMenus;
+    this.vestuarios= this.$store.getters.getVestuarios;
+    //this.selectedMenu=this.services.filter(services=> services.selected==true)
+    //this.menus=menus.filter(menu=> menu.idServiço == this.selectedService.id)
   },
   methods: {
     setSelectedService(id) {
@@ -145,6 +183,7 @@ export default {
           this.services[i].selected = true;
           this.selectedService=this.services[i]
           console.log("Selected service:   " + this.services[i]);
+          this.menus=this.allMenusStore.filter(menu=> menu.idServiço == this.selectedService.id)
         }
       }
     },
@@ -157,6 +196,18 @@ export default {
           this.menus[i].selected = true;
           this.selectedMenu= this.menus[i];
           console.log("Selected menu:   " + this.menus[i]);
+        }
+      }
+    },
+    setSelectedVestuario(id) {
+      for (let i = 0; i < this.vestuarios.length; i++) {
+        if (this.vestuarios[i].selected == true && this.vestuarios[i].id != id) {
+          this.vestuarios[i].selected = false;
+        }
+        if (this.vestuarios[i].selected == false && this.vestuarios[i].id == id) {
+          this.vestuarios[i].selected = true;
+          this.selectedVestuario= this.vestuarios[i];
+          console.log("Selected vestuario:   " + this.vestuarios[i]);
         }
       }
     },
@@ -200,7 +251,8 @@ export default {
         serviceName:this.selectedService.name,
         menuName: this.selectedMenu.name,
         date:this.datePicker,
-        time:this.timePicker
+        time:this.timePicker,
+        vestuario:this.selectedVestuario.name
        
 
 
