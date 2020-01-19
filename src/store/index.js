@@ -22,7 +22,14 @@ export default new Vuex.Store({
     {
       id: 2,
       name: "Menu C",
-      idServiço: 0,
+      idServiço: 1,
+      imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+      selected: false
+    },
+    {
+      id: 3,
+      idServiço: 2,
+      name: "Menu A",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },],
@@ -121,7 +128,15 @@ export default new Vuex.Store({
 
 
       })
-    }
+    },
+    ADDSERVICE: (state, payload) => {
+      state.services.push({
+        id: payload.id,
+        name: payload.name,
+        imgLink: payload.imgLink,
+        selected: false,
+      })
+    },
   },
   getters: {
     getLogin: (state) => (username, password) => {
@@ -139,6 +154,13 @@ export default new Vuex.Store({
       let lastId = 0
       if (state.requests.length > 0) {
         lastId = state.requests[state.requests.length - 1].id + 1
+      }
+      return lastId
+    },
+    getServLastId: (state) => {
+      let lastId = 0
+      if (state.services.length > 0) {
+        lastId = state.services[state.services.length - 1].id + 1
       }
       return lastId
     },

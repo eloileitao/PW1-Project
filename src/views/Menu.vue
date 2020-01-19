@@ -2,11 +2,13 @@
   <div>
     <NavbarSemLog />
     <v-container  fluid v-for="menu in menus" v-bind:key="menu.id">
-    
-        <h1 class="center">{{menu.name}}</h1>
+        <div v-if="getService($route.params.serviceId).id == menu.idServiço">
+        <h1 class="center" >{{menu.name}}</h1>
         <hr />
         <v-img class="imgStyle"  max-height="800" max-width="350" :src="menu.imgLink" aspect-ratio="1.7"></v-img>
-     <!--  <h1 class="center">Menu Details: {{ getService($route.params.serviceId).name }}</h1> -->
+        </div>
+        
+    <!--  <h1 class="center">Menu Details: {{ getService($route.params.serviceId).id }}</h1> -->
       
     
     </v-container>
@@ -53,6 +55,7 @@ export default {
   },
  methods: {
     getService(id) {
+        console.log(id)
       return this.menus.filter(menu => menu.idServiço === id)[0];
     }
   }
