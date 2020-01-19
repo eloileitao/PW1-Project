@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import About from "@/views/About.vue"
+import Catalog from "@/views/Catalog.vue";
+import Menu from "@/views/Menu.vue";
 import novoPedido from "@/views/novoPedido.vue";
 import UserBackOffice from "@/views/BackOffice/User.vue"
 import RequestsBackOffice from "@/views/BackOffice/Requests.vue"
@@ -36,6 +38,16 @@ const routes = [
     path: "/requestbackoffices",
     name: "request-backoffice",
     component: RequestsBackOffice
+   },
+   {
+    path: "/catalog",
+    name: "catalog",
+    component: Catalog
+   },
+   {
+    path: "/menu",
+    name: "menu",
+    component: Menu
    }
 ];
 

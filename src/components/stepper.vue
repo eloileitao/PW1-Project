@@ -4,8 +4,8 @@
     <h1 style="text-align: center">Faça o seu pedido</h1>
 
     <br />
-    <v-stepper v-model="e1" >
-     <v-stepper-header >
+    <v-stepper v-model="e1">
+      <v-stepper-header>
         <v-stepper-step :complete="e1 > 1" step="1" @click="e1 = 1">
           <v-btn text>Tipo de Serviço</v-btn>
         </v-stepper-step>
@@ -21,7 +21,7 @@
         <v-stepper-step step="3" @click="e1 = 3">
           <v-btn text>Data e hora</v-btn>
         </v-stepper-step>
-<v-divider></v-divider>
+        <v-divider></v-divider>
 
         <v-stepper-step step="4" @click="e1 = 4">
           <v-btn text>Vestuário</v-btn>
@@ -31,7 +31,7 @@
       <v-stepper-items>
         <v-stepper-content step="1">
           <v-card class="mb-12" flat>
-            <v-row justify="space-between" >
+            <v-row justify="space-between">
               <v-col v-for="service in services" v-bind:key="service.id" md="3" class="ma-5">
                 <div v-bind:class="{selected:service.selected}">
                   <v-hover v-slot:default="{ hover }">
@@ -57,7 +57,7 @@
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <v-card class="mb-12" flat >
+          <v-card class="mb-12" flat>
             <v-row justify="space-between">
               <v-col v-for="menu in menus" v-bind:key="menu.id" md="3" class="ma-5">
                 <div v-bind:class="{selected:menu.selected}">
@@ -106,14 +106,13 @@
           <v-btn text>Cancel</v-btn>
         </v-stepper-content>
 
-
-          <v-stepper-content step="4" flat>
-          <v-card class="mb-12" flat >
+        <v-stepper-content step="4" flat>
+          <v-card class="mb-12" flat>
             <v-row justify="space-between">
               <v-col v-for="vestuario in vestuarios" v-bind:key="vestuario.id" md="3" class="ma-5">
                 <div v-bind:class="{selected:vestuario.selected}">
                   <v-hover v-slot:default="{ hover }">
-                    <v-card color="grey lighten-4" height="150 px" outlined >
+                    <v-card color="grey lighten-4" height="150 px" outlined>
                       <v-img :aspect-ratio="16/9" :src="vestuario.img" style="margin-top: 25px">
                         <div
                           v-if="hover || vestuario.selected==true"
@@ -156,20 +155,20 @@ export default {
     return {
       services: [],
       menus: [],
-      vestuarios:[],
+      vestuarios: [],
       e1: 0,
       datePicker: new Date().toISOString().substr(0, 10),
       timePicker: null,
       request: null,
       selectedMenu: null,
-      selectedService:null,
-      selectedVestuario:null,
+      selectedService: null,
+      selectedVestuario: null
     };
   },
   created() {
     this.services = this.$store.getters.getServices;
     this.allMenusStore = this.$store.getters.getMenus;
-    this.vestuarios= this.$store.getters.getVestuarios;
+    this.vestuarios = this.$store.getters.getVestuarios;
     //this.selectedMenu=this.services.filter(services=> services.selected==true)
     //this.menus=menus.filter(menu=> menu.idServiço == this.selectedService.id)
   },
@@ -181,9 +180,11 @@ export default {
         }
         if (this.services[i].selected == false && this.services[i].id == id) {
           this.services[i].selected = true;
-          this.selectedService=this.services[i]
+          this.selectedService = this.services[i];
           console.log("Selected service:   " + this.services[i]);
-          this.menus=this.allMenusStore.filter(menu=> menu.idServiço == this.selectedService.id)
+          this.menus = this.allMenusStore.filter(
+            menu => menu.idServiço == this.selectedService.id
+          );
         }
       }
     },
@@ -194,19 +195,25 @@ export default {
         }
         if (this.menus[i].selected == false && this.menus[i].id == id) {
           this.menus[i].selected = true;
-          this.selectedMenu= this.menus[i];
+          this.selectedMenu = this.menus[i];
           console.log("Selected menu:   " + this.menus[i]);
         }
       }
     },
     setSelectedVestuario(id) {
       for (let i = 0; i < this.vestuarios.length; i++) {
-        if (this.vestuarios[i].selected == true && this.vestuarios[i].id != id) {
+        if (
+          this.vestuarios[i].selected == true &&
+          this.vestuarios[i].id != id
+        ) {
           this.vestuarios[i].selected = false;
         }
-        if (this.vestuarios[i].selected == false && this.vestuarios[i].id == id) {
+        if (
+          this.vestuarios[i].selected == false &&
+          this.vestuarios[i].id == id
+        ) {
           this.vestuarios[i].selected = true;
-          this.selectedVestuario= this.vestuarios[i];
+          this.selectedVestuario = this.vestuarios[i];
           console.log("Selected vestuario:   " + this.vestuarios[i]);
         }
       }
@@ -242,25 +249,17 @@ export default {
           icon: "error"
         });
       } else {
+        this.$store.commit("ADD_REQUEST", {
+          id: this.$store.getters.getReqLastId,
+          userId: this.$store.getters.getLoggedUser.id,
+          serviceName: this.selectedService.name,
+          menuName: this.selectedMenu.name,
+          date: this.datePicker,
+          time: this.timePicker,
+          vestuario: this.selectedVestuario.name
+        });
 
-        
-
-         this.$store.commit('ADD_REQUEST',{
-        id:this.$store.getters.getReqLastId,
-        userId:this.$store.getters.getLoggedUser.id,
-        serviceName:this.selectedService.name,
-        menuName: this.selectedMenu.name,
-        date:this.datePicker,
-        time:this.timePicker,
-        vestuario:this.selectedVestuario.name
-       
-
-
-
-        })
-
-
-         Swal.fire({
+        Swal.fire({
           title: "Pedido efetuado com sucesso!",
           icon: "success"
         });
