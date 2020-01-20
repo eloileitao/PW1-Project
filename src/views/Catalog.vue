@@ -12,15 +12,17 @@
                 <v-card color="grey lighten-4" height="150 px" outlined flat>
                   
                   <v-img :aspect-ratio="16/9" :src="service.imgLink">
+                  <router-link
+                    :to="{ name: 'menu', params: { serviceId: service.id } }"
+                    tag="button"
+                    :class="{ btn: true, 'btn-danger': true, 'btn-sm': true }"
+                  >
                     <div
                       v-if="hover"
                       class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
                       style="height: 100%;"
-                    ><router-link
-                    :to="{ name: 'menu', params: { serviceId: service.id } }"
-                    tag="button"
-                    :class="{ btn: true, 'btn-danger': true, 'btn-sm': true }"
-                  >{{service.name}}</router-link></div>
+                    >{{service.name}}</div>
+                    </router-link>
                   </v-img>
                 </v-card>
               </v-hover>
@@ -60,10 +62,13 @@ export default {
   },
   data: function() {
     return {
-      services: this.$store.state.services,
-      budget: []
+      services: [],
+    
+     // budget: []
     };
   },
+   created() {
+    this.services = this.$store.getters.getServices;}
 
 };
 </script>

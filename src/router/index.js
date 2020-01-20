@@ -51,7 +51,7 @@ const routes = [
     component: Catalog
    },
    {
-    path: "/menu",
+    path: "/menu/:serviceId",
     name: "menu",
     component: Menu
    }
