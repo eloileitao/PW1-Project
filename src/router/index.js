@@ -53,7 +53,10 @@ const routes = [
    {
     path: "/menu/:serviceId",
     name: "menu",
-    component: Menu
+    component: Menu,
+   /* children: [
+      { path: '', component: UserHome },
+    ]*/
    }
 ];
 
