@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Login from "@/views/Login.vue";
 import Home from "@/views/Home.vue";
 import About from "@/views/About.vue"
 import Catalog from "@/views/Catalog.vue";
@@ -8,6 +9,8 @@ import novoPedido from "@/views/novoPedido.vue";
 import UserBackOffice from "@/views/BackOffice/User.vue"
 import RequestsBackOffice from "@/views/BackOffice/Requests.vue"
 import CatalogBackOffice from "@/views/BackOffice/CatalogManager.vue"
+//import LogIn from "@/components/buttonModalLogin.vue"
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -16,6 +19,11 @@ const routes = [
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/Login",
+    name: "login",
+    component: Login
   },
   {
     path: "/about",
@@ -28,7 +36,14 @@ const routes = [
   {
     path: "/novoPedido",
     name: "novo-pedido",
-    component: novoPedido
+    component: novoPedido,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedUser.id==-1){
+        next("/logIn")
+      }else{
+        next();
+      }
+    }
   },
   {
    path: "/userbackoffices",

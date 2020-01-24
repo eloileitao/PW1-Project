@@ -1,11 +1,13 @@
 <template>
-  <v-dialog v-model="dialog" width="500">
-    
-    <template v-slot:activator="{ on }">
-      <v-btn text v-on="on">Login</v-btn>
-    </template>
-   
-    <v-card class="elevation-12">
+<v-parallax id="parallax" dark src="@/assets/asknzD.jpg" height="900"  align-center justify-center>
+<v-layout align-center justify-center>
+  <!-- <v-flex xs12 sm8 md4> -->
+     <v-flex  md3>
+    <!--<Navbar v-if="logedUser==false"></Navbar>-->
+    <!-- <NavbarSemLog /> -->
+       
+ 
+     <v-card class="elevation-12" >
       <v-toolbar color="orange darken-1" dark>
         <v-toolbar-title>Login</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -17,7 +19,7 @@
         <v-form class="flex mb-0">
           <v-text-field
             label="Username"
-            name="login"
+            
             prepend-icon="person"
             type="text"
             v-model="username"
@@ -26,7 +28,7 @@
           <v-text-field
             id="password"
             label="Password"
-            name="password"
+            
             prepend-icon="lock"
             type="password"
             v-model="password"
@@ -38,27 +40,46 @@
         <v-col cols="auto" class="text-center pl-0">
           <v-row class="flex-column ma-0 fill-height justify-center">
             <v-col>
-              <v-btn v-on:click="login(),dialog = false" dark>Login</v-btn>
+              <v-btn v-on:click="login()" dark>Login</v-btn>
             </v-col>
             <v-col>
-              <buttonModalRegister />
+              
             </v-col>
           </v-row>
         </v-col>
       </v-card-actions>
     </v-card>
-  </v-dialog>
+    
+    
+    <!-- <hero />
+    
+    <v-row align="center" justify="center">
+      <v-col align="center" justify="center">
+        <v-img src="@/assets/imgcomoFunciona2.png" width="70%" center></v-img>
+      </v-col>
+    </v-row>
+ 
+   <Footer ></Footer> -->
+   </v-flex>
+  </v-layout>
+
+    </v-parallax> 
+
 </template>
 
 <script>
-import buttonModalRegister from "./buttonModalRegister";
-//import modalLogin from "./modalLogin"
+//import buttonModalRegister from "./buttonModalRegister";
+//import NavbarSemLog from "@/components/NavBarSemLog.vue";
+//import hero from "@/components/hero.vue";
+//import Footer from "@/components/footer.vue";
 import Swal from "sweetalert2";
 
 export default {
   components: {
-    buttonModalRegister
-    //modalLogin
+    //NavbarSemLog,
+    //hero,
+    //Footer
+    //buttonModalRegister
   },
 
   data() {
@@ -79,7 +100,7 @@ export default {
         Swal.fire({
           title: "Login efetuado com sucesso!",
           icon: "success"
-        });
+        }).then(this.$router.push({name:"home"}));
       } else {
          Swal.fire({
           title: "Dados incorretos!",
@@ -90,3 +111,6 @@ export default {
   }
 };
 </script>
+
+
+

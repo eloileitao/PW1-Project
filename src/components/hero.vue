@@ -1,6 +1,8 @@
 <template>
   <div>
-    <v-parallax dark src="http://oyonode.com/images/theme-pics/paralax-orange-2.jpg">
+    <v-parallax dark src="@/assets/asknzD.jpg">
+    <!-- http://oyonode.com/images/theme-pics/paralax-orange-2.jpg -->
+    
       <v-row cols align="center" justify="center">
         <v-col class="text-center" md="12">
           <h1 class="display-2 mb-4">Personalize o seu serviço</h1>
