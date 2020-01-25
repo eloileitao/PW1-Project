@@ -4,14 +4,11 @@
 <div>
   <br>
 <br>
-<router-link :to="{name:'home'}" tag="button">
   <v-btn class="mb-1 ml-5" fab dark large color="purple" >
-    
+    <router-link :to="{name:'home'}" tag="button">
         <v-icon dark>mdi-home</v-icon>
-      
+      </router-link>
   </v-btn>
-  </router-link>
- 
 </div>
 
 <v-layout align-center justify-center >
@@ -55,7 +52,7 @@
         <v-col cols="auto" class="text-center pl-0">
           <v-row class="flex-column ma-0 fill-height justify-center">
             <v-col>
-              <v-btn v-on:click="login()" color="primary" >Login</v-btn>
+              <v-btn v-on:click="login()" primary>Login</v-btn>
             </v-col>
             <v-col>
               
