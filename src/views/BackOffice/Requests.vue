@@ -2,7 +2,7 @@
   <div>
     <NavbarSemLog />
     <div class="filterDiv">
-      <h1 class="orange darken-3">Gestão de Pedidos</h1>
+      <h1 style="color:darkorange">Gestão de Pedidos</h1>
     </div>
     <v-container class="my-5">
     <v-layout row wrap>

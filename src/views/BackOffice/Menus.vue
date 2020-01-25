@@ -2,7 +2,7 @@
   <v-content>
     <NavbarSemLog />
     <div class="Div">
-      <h1 style="color:orange">Gestão de Menus</h1>
+      <h1 style="color:darkorange">Gestão de Menus</h1>
     </div>
     <div>
       <v-dialog v-model="dialog" persistent max-width="600px">

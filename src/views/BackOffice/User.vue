@@ -2,12 +2,12 @@
   <div class="about">
     <NavbarSemLog />
     <div class="Div">
-      <h1 class="orange darken-3">Gestão de Utilizadores</h1>
+      <h1 style="color:darkorange">Gestão de Utilizadores</h1>
     </div>
     <div class="filterDiv">
         <div class="form-inline padding">
           <v-row>
-            <v-col cols="4">
+            <v-col cols="8">
               <v-text-field v-model="nameFilter" label="Filtrar por Username"></v-text-field>
             </v-col>
             <v-col cols="4">
@@ -77,7 +77,9 @@ th {
 }
 
 .filterDiv {
-  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .Div {
