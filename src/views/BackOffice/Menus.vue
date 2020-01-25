@@ -2,34 +2,41 @@
   <v-content>
     <NavbarSemLog />
     <div class="Div">
-      <h1 class="orange darken-3">Gestão de Serviços</h1>
+      <h1 style="color:orange">Gestão de Menus</h1>
     </div>
-    <div class="filterDiv">
+    <div>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on }">
-          <div class="justify-center">
-            <v-btn class="btnAdd" color="primary" dark v-on="on">Adicionar Menu</v-btn>
+          <div class="btnPos">
+            <v-btn class="btnAdd" color="indigo" dark v-on="on">Adicionar Menu</v-btn>
           </div>
         </template>
         <v-card>
           <v-card-title>
-            <span class="headline">Adicionar Serviço</span>
+            <span class="headline">Adicionar Menu</span>
           </v-card-title>
           <v-card-text>
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field label="Nome do Serviço*" v-model="name" required></v-text-field>
+                  <v-text-field label="Nome do Menu*" v-model="name" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="Linkd da Imagem*" v-model="imgLink" required></v-text-field>
+                  <v-text-field label="Link da Imagem*" v-model="imgLink" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field label="Descrição*" v-model="desc" required></v-text-field>
                 </v-col>
 
                 <v-col cols="12" sm="6">
-                  <v-select :items="services" label="Serviços de Referencia"  item-text="name" item-value="id" v-model="idServico" required></v-select>
+                  <v-select
+                    :items="services"
+                    label="Serviços de Referencia*"
+                    item-text="name"
+                    item-value="id"
+                    v-model="idServico"
+                    required
+                  ></v-select>
                 </v-col>
               </v-row>
             </v-container>
@@ -43,7 +50,7 @@
         </v-card>
       </v-dialog>
     </div>
-
+    <br />
     <table>
       <tr>
         <th>ID do Menu</th>
@@ -89,10 +96,6 @@ th {
   color: white;
 }
 
-.filterDiv {
-  background-color: orange;
-}
-
 .Div {
   color: white;
   text-align: center;
@@ -109,6 +112,12 @@ th {
 
 .marginBtn {
   margin-left: 20px;
+}
+
+.btnPos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 footer {

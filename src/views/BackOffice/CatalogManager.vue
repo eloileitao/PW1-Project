@@ -2,13 +2,13 @@
   <v-content>
     <NavbarSemLog />
     <div class="Div">
-      <h1 class="orange darken-3">Gestão de Serviços</h1>
+      <h1 style="color:orange">Gestão de Serviços</h1>
     </div>
-    <div class="filterDiv">
+    <div>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on }">
-          <div class="justify-center">
-           <v-btn class="btnAdd" color="primary" dark v-on="on">Adicionar Serviço</v-btn>
+          <div class="btnPos">
+            <v-btn class="btnAdd" color="indigo" dark v-on="on">Adicionar Serviço</v-btn>
           </div>
         </template>
         <v-card>
@@ -18,19 +18,11 @@
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12" >
+                <v-col cols="12">
                   <v-text-field label="Nome do Serviço*" v-model="name" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="Linkd da Imagem*" v-model="imgLink" required></v-text-field>
-                </v-col>
-            
-                <v-col cols="12" sm="6">
-                  <v-autocomplete
-                    :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                    label="Interests"
-                    multiple
-                  ></v-autocomplete>
+                  <v-text-field label="Link da Imagem*" v-model="imgLink" required></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -44,7 +36,7 @@
         </v-card>
       </v-dialog>
     </div>
-
+    <br />
     <table>
       <tr>
         <th>ID do Serviço</th>
@@ -86,10 +78,6 @@ th {
   color: white;
 }
 
-.filterDiv {
-  background-color: orange;
-}
-
 .Div {
   color: white;
   text-align: center;
@@ -108,6 +96,12 @@ th {
   margin-left: 20px;
 }
 
+.btnPos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 footer {
   margin-top: 250px;
 }
@@ -124,9 +118,9 @@ export default {
   data: function() {
     return {
       dialog: false,
-      name:"",
-      imgLink:"",
-      services: this.$store.state.services,
+      name: "",
+      imgLink: "",
+      services: this.$store.state.services
     };
   },
   methods: {
@@ -137,7 +131,7 @@ export default {
         imgLink: this.imgLink
       });
     },
- 
+
     removeService(id) {
       const swalButtons = Swal.mixin({
         customClass: {
@@ -163,13 +157,12 @@ export default {
           if (result.value) {
             swalButtons.fire("Serviço removido com sucesso", "", "success");
             for (let i = 0; i < this.services.length; i++) {
-               if(this.services[i].id == id){
-                 this.services.splice(i, 1);
-               }
-                
+              if (this.services[i].id == id) {
+                this.services.splice(i, 1);
+              }
             }
-           
-            console.log(this.services)
+
+            console.log(this.services);
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
@@ -177,8 +170,7 @@ export default {
             swalButtons.fire("Cancelado", "A sua ação foi cancelada", "error");
           }
         });
-    },
-
+    }
   }
 };
 </script>
