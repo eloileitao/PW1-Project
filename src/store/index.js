@@ -7,29 +7,33 @@ export default new Vuex.Store({
   state: {
     menus: [{
       id: 0,
-      idServiço: 0,
+      idServico: 0,
       name: "Menu A",
+      desc:"",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },
     {
       id: 1,
-      idServiço: 0,
+      idServico: 0,
       name: "Menu B",
+      desc:"",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },
     {
       id: 2,
+      idServico: 1,
       name: "Menu C",
-      idServiço: 1,
+      desc:"",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },
     {
       id: 3,
-      idServiço: 2,
+      idServico: 2,
       name: "Menu A",
+      desc:"",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },],
@@ -137,6 +141,16 @@ export default new Vuex.Store({
         selected: false,
       })
     },
+    ADDMENU: (state, payload) => {
+      state.menus.push({
+        id: payload.id,
+        idServico: payload.idServico,
+        name: payload.name,
+        imgLink: payload.imgLink,
+        desc: payload.desc,
+        selected: false,
+      })
+    },
   },
   getters: {
     getLogin: (state) => (username, password) => {
@@ -161,6 +175,13 @@ export default new Vuex.Store({
       let lastId = 0
       if (state.services.length > 0) {
         lastId = state.services[state.services.length - 1].id + 1
+      }
+      return lastId
+    },
+    getMenuLastId: (state) => {
+      let lastId = 0
+      if (state.menus.length > 0) {
+        lastId = state.menus[state.menus.length - 1].id + 1
       }
       return lastId
     },

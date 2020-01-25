@@ -9,6 +9,7 @@ import novoPedido from "@/views/novoPedido.vue";
 import UserBackOffice from "@/views/BackOffice/User.vue"
 import RequestsBackOffice from "@/views/BackOffice/Requests.vue"
 import CatalogBackOffice from "@/views/BackOffice/CatalogManager.vue"
+import MenusBackOffice from "@/views/BackOffice/Menus.vue"
 //import LogIn from "@/components/buttonModalLogin.vue"
 import store from "../store";
 
@@ -59,6 +60,11 @@ const routes = [
     path: "/catalogbackoffices",
     name: "catalog-backoffice",
     component: CatalogBackOffice
+   },
+   {
+    path: "/menusbackoffices",
+    name: "menus-backoffice",
+    component: MenusBackOffice
    },
    {
     path: "/catalog",

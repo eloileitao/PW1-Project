@@ -8,7 +8,7 @@
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on }">
           <div class="justify-center">
-           <v-btn class="btnAdd" color="primary" dark v-on="on">Adicionar Serviço</v-btn>
+            <v-btn class="btnAdd" color="primary" dark v-on="on">Adicionar Menu</v-btn>
           </div>
         </template>
         <v-card>
@@ -18,19 +18,18 @@
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12" >
+                <v-col cols="12">
                   <v-text-field label="Nome do Serviço*" v-model="name" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field label="Linkd da Imagem*" v-model="imgLink" required></v-text-field>
                 </v-col>
-            
+                <v-col cols="12">
+                  <v-text-field label="Descrição*" v-model="desc" required></v-text-field>
+                </v-col>
+
                 <v-col cols="12" sm="6">
-                  <v-autocomplete
-                    :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                    label="Interests"
-                    multiple
-                  ></v-autocomplete>
+                  <v-select :items="services" label="Serviços de Referencia"  item-text="name" item-value="id" v-model="idServico" required></v-select>
                 </v-col>
               </v-row>
             </v-container>
@@ -47,17 +46,21 @@
 
     <table>
       <tr>
-        <th>ID do Serviço</th>
+        <th>ID do Menu</th>
         <th>Nome</th>
         <th>Link da Imagem</th>
+        <th>Descrição</th>
+        <th>Serviço Referente</th>
         <th>Actions</th>
       </tr>
-      <tr v-for="service in services" :key="service.id">
-        <td>{{ service.id }}</td>
-        <td>{{ service.name }}</td>
-        <td>{{ service.imgLink }}</td>
+      <tr v-for="menu in menus" :key="menu.id">
+        <td>{{ menu.id }}</td>
+        <td>{{ menu.name }}</td>
+        <td>{{ menu.imgLink }}</td>
+        <td>{{ menu.desc }}</td>
+        <td>{{ menu.idServico }}</td>
         <td>
-          <v-btn small @click="removeService(service.id)" color="error">Remover</v-btn>
+          <v-btn small @click="removeService(menu.id)" color="error">Remover</v-btn>
         </td>
       </tr>
     </table>
@@ -123,21 +126,33 @@ export default {
 
   data: function() {
     return {
-      dialog: false,
-      name:"",
-      imgLink:"",
       services: this.$store.state.services,
+      dialog: false,
+      idServico: 0,
+      name: "",
+      imgLink: "",
+      desc: "",
+      menus: this.$store.state.menus
     };
   },
   methods: {
     addItem() {
-      this.$store.commit("ADDSERVICE", {
-        id: this.$store.getters.getServLastId,
+      this.$store.commit("ADDMENU", {
+        id: this.$store.getters.getMenuLastId,
+        idServico: this.idServico,
         name: this.name,
-        imgLink: this.imgLink
+        imgLink: this.imgLink,
+        desc: this.desc
       });
     },
- 
+
+    /*   getServices(){
+        for (let i = 0; i < this.services.length; i++) {
+            let serviceName = this.services[i].name;
+            return serviceName   
+        }
+    },  */
+
     removeService(id) {
       const swalButtons = Swal.mixin({
         customClass: {
@@ -149,7 +164,7 @@ export default {
 
       swalButtons
         .fire({
-          title: "Deseja mesmo remover este serviço?",
+          title: "Deseja mesmo remover este menu?",
           text: "Não vai ser possivel reverter esta ação",
           icon: "warning",
           showCancelButton: true,
@@ -161,15 +176,12 @@ export default {
         })
         .then(result => {
           if (result.value) {
-            swalButtons.fire("Serviço removido com sucesso", "", "success");
-            for (let i = 0; i < this.services.length; i++) {
-               if(this.services[i].id == id){
-                 this.services.splice(i, 1);
-               }
-                
+            swalButtons.fire("Menu removido com sucesso", "", "success");
+            for (let i = 0; i < this.menus.length; i++) {
+              if (this.menus[i].id == id) {
+                this.menus.splice(i, 1);
+              }
             }
-           
-            console.log(this.services)
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
@@ -177,8 +189,7 @@ export default {
             swalButtons.fire("Cancelado", "A sua ação foi cancelada", "error");
           }
         });
-    },
-
+    }
   }
 };
 </script>

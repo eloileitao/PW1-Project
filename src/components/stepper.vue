@@ -170,7 +170,7 @@ export default {
     this.allMenusStore = this.$store.getters.getMenus;
     this.vestuarios = this.$store.getters.getVestuarios;
     //this.selectedMenu=this.services.filter(services=> services.selected==true)
-    //this.menus=menus.filter(menu=> menu.idServiço == this.selectedService.id)
+    //this.menus=menus.filter(menu=> menu.idServico == this.selectedService.id)
   },
   methods: {
     setSelectedService(id) {
@@ -183,7 +183,7 @@ export default {
           this.selectedService = this.services[i];
           console.log("Selected service:   " + this.services[i]);
           this.menus = this.allMenusStore.filter(
-            menu => menu.idServiço == this.selectedService.id
+            menu => menu.idServico == this.selectedService.id
           );
         }
       }

@@ -55,7 +55,7 @@ export default {
     };
   },
  created() {
-    this.menus = this.$store.getters.getMenus.filter(menu => menu.idServiço === this.$route.params.serviceId);
+    this.menus = this.$store.getters.getMenus.filter(menu => menu.idServico === this.$route.params.serviceId);
   //getService($route.params.serviceId)
   //this.serviceId=this.$route.params.serviceId,
   console.log(this.menus)
@@ -65,7 +65,7 @@ export default {
  methods: {
     getService(id) {
         console.log(id)
-      return this.menus.filter(menu => menu.idServiço === id);
+      return this.menus.filter(menu => menu.idServico === id);
     }
   }
 };
