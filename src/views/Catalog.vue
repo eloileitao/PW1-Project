@@ -2,7 +2,7 @@
   <div>
     <NavbarSemLog />
     <div>
-      <h1 class="center">Catálogo</h1>
+      <h1 class="center">Serviço</h1>
       <hr />
       <v-container class="my-5">
         <v-card class="mb-12" flat>

@@ -11,7 +11,7 @@
         <v-spacer></v-spacer>
 
         <v-toolbar-items>
-          <router-link :to="{name:'catalog'}" tag="button"> <v-btn text>Catalogo</v-btn></router-link>
+          <router-link :to="{name:'catalog'}" tag="button"> <v-btn text>Serviços</v-btn></router-link>
           <v-btn text>Galeria</v-btn>
           <v-btn text>Sobre</v-btn>
           <buttonModalLogin v-if="getLoggedUser().id==-1"></buttonModalLogin>
