@@ -14,7 +14,8 @@
           <router-link :to="{name:'services'}" tag="button"> <v-btn text>Serviços</v-btn></router-link>
           <v-btn text>Galeria</v-btn>
           <v-btn text>Sobre</v-btn>
-          <buttonModalLogin v-if="getLoggedUser().id==-1"></buttonModalLogin>
+            <router-link :to="{name:'login'}" tag="button" v-if="getLoggedUser().id==-1"><v-btn text>Login</v-btn></router-link>
+          <!-- <buttonModalLogin v-if="getLoggedUser().id==-1"></buttonModalLogin> -->
           <!--<buttonModalRegister v-if="getLoggedUser().id==-1"></buttonModalRegister>-->
 
           <v-menu offset-y v-if="getLoggedUser().id!=-1">
@@ -71,11 +72,11 @@
 
 
 <script>
-import buttonModalLogin from "./buttonModalLogin";
+//import buttonModalLogin from "./buttonModalLogin";
 //import buttonModalRegister from "./buttonModalRegister";
 export default {
   components: {
-    buttonModalLogin,
+    //buttonModalLogin,
     //buttonModalRegister
   },
 

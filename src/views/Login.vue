@@ -59,7 +59,7 @@
             </v-col>
             <v-col>
               
-              <v-btn dark> <router-link :to="{name:'Register'}" tag="button">Criar Conta</router-link></v-btn>
+              <v-btn dark> <router-link :to="{name:'register'}" tag="button">Criar Conta</router-link></v-btn>
               
             </v-col>
           </v-row>
