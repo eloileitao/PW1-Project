@@ -58,7 +58,7 @@
               </v-list-item>
               <v-list-item>
                 <v-list-item-title>
-                  <v-btn text v-on:click="logout()">Log Out</v-btn>
+                  <router-link :to="{name:'home'}" tag="button"><v-btn text v-on:click="logout()">Log Out</v-btn></router-link>
                 </v-list-item-title>
               </v-list-item>
             </v-list>
