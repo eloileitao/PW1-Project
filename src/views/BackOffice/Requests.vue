@@ -81,7 +81,7 @@ export default {
     };
   },
   methods: {
-    //FUNCAO
+    //FUNCAO 1
     sendBudget(id) {
       const swalButtons = Swal.mixin({
         customClass: {
