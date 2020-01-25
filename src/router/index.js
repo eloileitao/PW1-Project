@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Login from "@/views/Login.vue";
 import Home from "@/views/Home.vue";
 import About from "@/views/About.vue"
-import Catalog from "@/views/Catalog.vue";
+import services from "@/views/Catalog.vue";
 import Menu from "@/views/Menu.vue";
 import novoPedido from "@/views/novoPedido.vue";
 import UserBackOffice from "@/views/BackOffice/User.vue"
@@ -67,9 +67,9 @@ const routes = [
     component: MenusBackOffice
    },
    {
-    path: "/catalog",
-    name: "catalog",
-    component: Catalog
+    path: "/services",
+    name: "services",
+    component: services
    },
    {
     path: "/menu/:serviceId",
