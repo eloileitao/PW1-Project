@@ -1,10 +1,22 @@
-<template>
-<v-parallax id="parallax" dark src="@/assets/asknzD.jpg" height="900"  align-center justify-center>
-<v-layout align-center justify-center>
+<template >
+<v-parallax id="parallax" dark src="@/assets/asknzD.jpg"   >
+
+<div>
+  <br>
+<br>
+  <v-btn class="mb-1 ml-5" fab dark large color="purple" >
+    <router-link :to="{name:'home'}" tag="button">
+        <v-icon dark>mdi-home</v-icon>
+      </router-link>
+  </v-btn>
+</div>
+
+<v-layout align-center justify-center >
+
+
   <!-- <v-flex xs12 sm8 md4> -->
      <v-flex  md3>
-    <!--<Navbar v-if="logedUser==false"></Navbar>-->
-    <!-- <NavbarSemLog /> -->
+
        
  
      <v-card class="elevation-12" >
@@ -86,9 +98,13 @@ export default {
     return {
       dialog: false,
       username: "",
-      password: ""
+      password: "",
+      
     };
   },
+  mounted(){ document.getElementById('parallax').style.height = '100vh'}
+  ,
+  created(){},
   computed: {},
   methods: {
     login() {
@@ -111,6 +127,11 @@ export default {
   }
 };
 </script>
+
+<style>
+
+
+</style>
 
 
 
