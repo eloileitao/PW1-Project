@@ -73,7 +73,7 @@
                       </v-img>
                     </v-card>
                   </v-hover>
-                </div>
+               </div>
               </v-col>
             </v-row>
           </v-card>
@@ -252,6 +252,7 @@ export default {
         this.$store.commit("ADD_REQUEST", {
           id: this.$store.getters.getReqLastId,
           userId: this.$store.getters.getLoggedUser.id,
+          userName: this.$store.getters.getLoggedUser.username,
           serviceName: this.selectedService.name,
           menuName: this.selectedMenu.name,
           date: this.datePicker,

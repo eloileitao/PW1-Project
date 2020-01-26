@@ -34,7 +34,7 @@
               </v-list-item>
               <v-list-item v-if="getLoggedUser().type==3">
                 <v-list-item-title>
-                  <v-btn text>Meus Pedidos</v-btn>
+                  <router-link :to="{name:'myrequests'}" tag="button"><v-btn text>Meus Pedidos</v-btn></router-link>
                 </v-list-item-title>
               </v-list-item>
               <v-list-item v-if="getLoggedUser().type==1">

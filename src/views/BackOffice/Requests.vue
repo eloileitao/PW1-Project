@@ -5,33 +5,37 @@
       <h1 style="color:darkorange">Gestão de Pedidos</h1>
     </div>
     <v-container class="my-5">
-    <v-layout row wrap>
-      <v-flex xs12 sm6 md4 lg3 v-for="request in requests" :key="request.id">
-        <v-card class="text-center ma-3 orange padding">
-          <v-responsive class="pt-3">image goes here</v-responsive>
-          <v-card-text>
-            <div class="subheading">{{request.id}}</div>
-            <div class="subheading">{{request.user_name}}</div>
-            <div class="subheading">{{request.budget}}</div>
-          </v-card-text>
-          <v-row>
-            <v-col cols="6">
-              <v-text-field v-model="budget[request.id - 1]" label="Orçamento"></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-card-actions>
-                <v-btn color="primary" @click="sendBudget(request.id - 1)" class="ma-1">
-                  Accept
-                  <v-icon dark small class="pa-1">mdi-checkbox-marked-circle</v-icon>
-                </v-btn>
-              </v-card-actions>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
-  <Footer ></Footer>
+      <v-layout row wrap>
+        <v-flex xs12 sm6 md4 lg3 v-for="request in requests" :key="request.id">
+          <v-card class="text-center ma-3 orange padding">
+            <v-list-item-content>
+              <div class="overline">{{request.id}}</div>
+              <v-list-item-title class="headline mb-1">{{request.serviceName}}</v-list-item-title>
+              <v-list-item-subtitle>{{request.menuName}}</v-list-item-subtitle>
+              <div class="subheading">{{request.date}}</div>
+              <div class="subheading">{{request.time}}</div>
+            </v-list-item-content>
+            <v-card-text>
+              <div class="subheading">Utilizador: {{request.userName}}</div>
+            </v-card-text>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field v-model="budget[request.id - 1]" label="Orçamento"></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-card-actions>
+                  <v-btn color="primary" @click="sendBudget(request.id - 1)" class="ma-1">
+                    Accept
+                    <v-icon dark small class="pa-1">mdi-checkbox-marked-circle</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -59,7 +63,7 @@ template {
   margin-left: 20px;
 }
 
-Footer{
+footer {
   margin-top: 250px;
 }
 </style>
@@ -77,11 +81,11 @@ export default {
   data: function() {
     return {
       requests: this.$store.state.requests,
+      serviceName: "",
       budget: []
     };
   },
   methods: {
-    //FUNCAO 1
     sendBudget(id) {
       const swalButtons = Swal.mixin({
         customClass: {
@@ -106,10 +110,35 @@ export default {
         .then(result => {
           if (result.value) {
             swalButtons.fire("Orçamento enviado com sucesso", "", "success");
-            this.$store.commit("UPDATEBUDGET", this.budget[id]);
-            this.requests = this.requests.filter(
+            
+
+           for(let i = 0; this.requests.length; i++){
+              if (this.requests[i].id === id) {
+                console.log(this.requests[i].userId)
+                this.serviceName = this.requests[i].serviceName
+                this.$store.commit("ADDREQUESTTOUSER", {
+                  id: this.$store.getters.getRequestToUserLastId,
+                  idUser: this.requests[i].userId,
+                  userName: this.requests[i].userName,
+                  serviceName: this.serviceName,
+                  menuName: this.requests[i].menuName,
+                  budget: this.budget,
+                  state: 2
+                 /*  date: this.datePicker,
+                  time: this.timePicker,
+                  vestuario: this.selectedVestuario.name */
+                });
+
+                this.requests = this.requests.filter(
               request => request.id !== id + 1
-            );
+               );
+              }
+              }
+
+              
+            
+            
+           
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel

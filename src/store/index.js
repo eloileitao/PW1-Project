@@ -41,12 +41,14 @@ export default new Vuex.Store({
       {
         id:0,
         name: "Formal",
-        img: "https://i.pinimg.com/originals/a9/f3/d5/a9f3d5b95b612e63bb8c601aa0433612.jpg"
+        img: "https://i.pinimg.com/originals/a9/f3/d5/a9f3d5b95b612e63bb8c601aa0433612.jpg",
+        selected: false
       },
       {
         id:1,
         name: "Informal",
-        img: "https://www.russums-shop.co.uk/files/uk/imagelibrary/subcategory/coloured-shirts.jpg"
+        img: "https://www.russums-shop.co.uk/files/uk/imagelibrary/subcategory/coloured-shirts.jpg",
+        selected: false
       }
     ],
     users: [{
@@ -103,6 +105,18 @@ export default new Vuex.Store({
 
       }
     ],
+    userRequests: [
+      {
+        id: 0,
+        idUser: 1,
+        serviceName: "Coffe Break",
+        menuName: "Menu A",
+        userName: "joao",
+        budget: 50,
+        state: 2
+
+      }
+    ]
 
   },
   mutations: {
@@ -124,13 +138,26 @@ export default new Vuex.Store({
       state.requests.push({
         id: payload.id,
         userId: payload.userId,
+        userName: payload.userName,
         serviceName: payload.serviceName,
         menuName: payload.menuName,
         date: payload.date,
         time: payload.time,
         vestuario: payload.vestuario
-
-
+      })
+    },
+    ADDREQUESTTOUSER: (state, payload) => {
+      state.userRequests.push({
+        id: payload.id,
+        idUser: payload.idUser,
+        userName: payload.userName,
+        serviceName: payload.serviceName,
+        menuName: payload.menuName,
+        budget: payload.budget,
+        state: payload.state
+   /*      date: payload.date,
+        time: payload.time,
+        vestuario: payload.vestuario */
       })
     },
     ADDSERVICE: (state, payload) => {
@@ -185,6 +212,13 @@ export default new Vuex.Store({
       }
       return lastId
     },
+    getRequestToUserLastId: (state) => {
+      let lastId = 0
+      if (state.userRequests.length > 0) {
+        lastId = state.userRequests[state.userRequests.length - 1].id + 1
+      }
+      return lastId
+    },
     getLoggedUser: (state) => {
       return state.loggedUser;
     },
@@ -193,6 +227,9 @@ export default new Vuex.Store({
     },
     getMenus: (state) => {
       return state.menus;
+    },
+    getUserRequests: (state) => {
+      return state.userRequests;
     },
     getVestuarios: (state) => {
       return state.vestuarios;
