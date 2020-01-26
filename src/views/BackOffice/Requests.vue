@@ -20,11 +20,11 @@
             </v-card-text>
             <v-row>
               <v-col cols="6">
-                <v-text-field v-model="budget[request.id - 1]" label="Orçamento"></v-text-field>
+                <v-text-field v-model="budget[request.id]" label="Orçamento"></v-text-field>
               </v-col>
               <v-col cols="6">
                 <v-card-actions>
-                  <v-btn color="primary" @click="sendBudget(request.id - 1)" class="ma-1">
+                  <v-btn color="primary" @click="sendBudget(request.id)" class="ma-1">
                     Accept
                     <v-icon dark small class="pa-1">mdi-checkbox-marked-circle</v-icon>
                   </v-btn>
@@ -81,8 +81,7 @@ export default {
   data: function() {
     return {
       requests: this.$store.state.requests,
-      serviceName: "",
-      budget: []
+      budget: 0
     };
   },
   methods: {
@@ -112,25 +111,24 @@ export default {
             swalButtons.fire("Orçamento enviado com sucesso", "", "success");
             
 
-           for(let i = 0; this.requests.length; i++){
+           for(let i = 0; i < this.requests.length; i++){
               if (this.requests[i].id === id) {
-                console.log(this.requests[i].userId)
-                this.serviceName = this.requests[i].serviceName
+                console.log(this.requests[i])
                 this.$store.commit("ADDREQUESTTOUSER", {
                   id: this.$store.getters.getRequestToUserLastId,
                   idUser: this.requests[i].userId,
                   userName: this.requests[i].userName,
-                  serviceName: this.serviceName,
+                  serviceName: this.requests[i].serviceName,
                   menuName: this.requests[i].menuName,
                   budget: this.budget,
-                  state: 2
+                  state: 2 
                  /*  date: this.datePicker,
                   time: this.timePicker,
                   vestuario: this.selectedVestuario.name */
-                });
+                 }); 
 
                 this.requests = this.requests.filter(
-              request => request.id !== id + 1
+              request => request.id !== id
                );
               }
               }

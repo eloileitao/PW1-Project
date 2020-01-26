@@ -61,26 +61,26 @@ export default new Vuex.Store({
     ],
     loggedUser: { id: -1 },
     requests: [
-      {
-        id: 1,
-        user_id: 1,
-        user_name: "user1",
-      },
-      {
-        id: 2,
-        user_id: 1,
-        user_name: "user2",
-      },
-      {
-        id: 3,
-        user_id: 1,
-        user_name: "user3",
-      },
-      {
-        id: 4,
-        user_id: 1,
-        user_name: "user4",
-      },
+    {
+      id: 0,
+      userId: 2,
+      userName: "marcia",
+      serviceName: "Coffe Break",
+      menuName: "Menu A",
+      date: "2020-01-30",
+      time: "06:35",
+      vestuario: "Formal"
+    },
+    {
+      id: 1,
+      userId: 1,
+      userName: "joao",
+      serviceName: "Coffe Break",
+      menuName: "Menu A",
+      date: "2020-01-30",
+      time: "06:35",
+      vestuario: "Formal"
+    }
     ],
     services: [
       {
