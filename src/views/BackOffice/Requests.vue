@@ -81,7 +81,7 @@ export default {
   data: function() {
     return {
       requests: this.$store.state.requests,
-      budget: 0
+      budget: []
     };
   },
   methods: {
@@ -120,7 +120,7 @@ export default {
                   userName: this.requests[i].userName,
                   serviceName: this.requests[i].serviceName,
                   menuName: this.requests[i].menuName,
-                  budget: this.budget,
+                  budget: this.budget[i],
                   state: 2 
                  /*  date: this.datePicker,
                   time: this.timePicker,
