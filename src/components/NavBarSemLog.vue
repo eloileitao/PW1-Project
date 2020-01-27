@@ -29,8 +29,9 @@
               <v-list-item v-if="getLoggedUser().type==3" >
                 <v-list-item-title  >
                     <v-btn text v-if="this.notification === 0">Sem Notificações</v-btn>
-                  <v-btn text v-if="this.notification === 1">Pedido em Análise</v-btn>
-                  <router-link :to="{name:'myrequests'}" tag="button"> <v-btn text v-if="this.notification === 2">Pedido Pronto para Pagamento</v-btn></router-link>
+                  <v-btn text v-if="this.notification === 1 && this.qtNotification === 1">Pedido em Análise</v-btn>
+                  <v-btn text v-if="this.notification === 1 && this.qtNotification > 1">Pedidos em Análise</v-btn>
+                  <router-link :to="{name:'myrequests'}" tag="button"> <v-btn text v-if="this.notification === 2">Um ou Mais Pedidos Prontos para Pagamento</v-btn></router-link>
                 </v-list-item-title>
               </v-list-item>
             </v-list>
@@ -104,6 +105,8 @@ export default {
     return {
       //loggedUser:this.$store.getters.getLoggedUser,
       notification: 0,
+      qtNotification: 0,
+      saveNotification: 0,
       notifications: this.$store.state.notifications
     };
   },
@@ -124,9 +127,11 @@ export default {
     checkNotification() {
       console.log(this.notification)
       for (let i = 0; i < this.notifications.length; i++) {
+  
         if(this.notifications[i].userId == this.loggedUser.id) {
+          this.qtNotification = this.qtNotification + 1
           this.notification = this.notifications[i].state
-          console.log(this.notifications[i].state)
+          console.log(this.qtNotification)
         }  
       }
       
