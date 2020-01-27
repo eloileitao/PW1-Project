@@ -18,6 +18,26 @@
           <!-- <buttonModalLogin v-if="getLoggedUser().id==-1"></buttonModalLogin> -->
           <!--<buttonModalRegister v-if="getLoggedUser().id==-1"></buttonModalRegister>-->
 
+            <v-menu offset-y v-if="getLoggedUser().type==3">
+            <template v-slot:activator="{ on }">
+              <v-btn text v-on="on" @click="checkNotification()">
+                <v-icon>mdi-bell</v-icon>
+              </v-btn>
+            </template>
+            
+            <v-list>
+              <v-list-item v-if="getLoggedUser().type==3" >
+                <v-list-item-title  >
+                    <v-btn text v-if="this.notification === 0">Sem Notificações</v-btn>
+                  <v-btn text v-if="this.notification === 1">Pedido em Análise</v-btn>
+                  <router-link :to="{name:'myrequests'}" tag="button"> <v-btn text v-if="this.notification === 2">Pedido Pronto para Pagamento</v-btn></router-link>
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+
+
           <v-menu offset-y v-if="getLoggedUser().id!=-1">
             <template v-slot:activator="{ on }">
               <v-btn text v-on="on">
@@ -25,7 +45,7 @@
                 <v-icon>mdi-menu-down</v-icon>
               </v-btn>
             </template>
-
+            
             <v-list>
               <v-list-item v-if="getLoggedUser().type==3">
                 <v-list-item-title >
@@ -83,6 +103,8 @@ export default {
   data() {
     return {
       //loggedUser:this.$store.getters.getLoggedUser,
+      notification: 0,
+      notifications: this.$store.state.notifications
     };
   },
   beforeCreate: function() {
@@ -98,6 +120,16 @@ export default {
     },
     getLoggedUser() {
       return this.$store.getters.getLoggedUser;
+    },
+    checkNotification() {
+      console.log(this.notification)
+      for (let i = 0; i < this.notifications.length; i++) {
+        if(this.notifications[i].userId == this.loggedUser.id) {
+          this.notification = this.notifications[i].state
+          console.log(this.notifications[i].state)
+        }  
+      }
+      
     }
   }
 };

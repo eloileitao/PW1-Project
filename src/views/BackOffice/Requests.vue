@@ -24,7 +24,11 @@
               </v-col>
               <v-col cols="6">
                 <v-card-actions>
-                  <v-btn color="primary" @click="sendBudget(request.id)" class="ma-1">
+                  <v-btn
+                    color="primary"
+                    @click="sendBudget(request.id), updateNotification(request.userId)"
+                    class="ma-1"
+                  >
                     Accept
                     <v-icon dark small class="pa-1">mdi-checkbox-marked-circle</v-icon>
                   </v-btn>
@@ -81,10 +85,19 @@ export default {
   data: function() {
     return {
       requests: this.$store.state.requests,
+      notifications: this.$store.state.notifications,
       budget: []
     };
   },
   methods: {
+    updateNotification(id) {
+      for (let i = 0; i < this.notifications.length; i++) {
+        if (this.notifications[i].userId == id) {
+          this.notifications[i].state = 2;
+          console.log(this.notifications[i].state);
+        }
+      }
+    },
     sendBudget(id) {
       const swalButtons = Swal.mixin({
         customClass: {
@@ -109,6 +122,7 @@ export default {
         .then(result => {
           if (result.value) {
             swalButtons.fire("Orçamento enviado com sucesso", "", "success");
+            console.log(id);
 
             for (let i = 0; i < this.requests.length; i++) {
               if (this.requests[i].id === id) {

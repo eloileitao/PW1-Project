@@ -116,6 +116,9 @@ export default new Vuex.Store({
         state: 2
 
       }
+    ],
+    notifications: [
+      
     ]
 
   },
@@ -144,6 +147,15 @@ export default new Vuex.Store({
         date: payload.date,
         time: payload.time,
         vestuario: payload.vestuario
+      })
+    },
+    UPDATENOTIFICATION: (state, payload) => {
+      state.notifications.push({
+        userId: payload.userId,
+        userName: payload.userName,
+        serviceName: payload.serviceName,
+        menuName: payload.menuName,
+        state: payload.state
       })
     },
     ADDREQUESTTOUSER: (state, payload) => {

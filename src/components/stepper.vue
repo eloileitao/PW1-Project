@@ -260,6 +260,15 @@ export default {
           vestuario: this.selectedVestuario.name
         });
 
+        this.$store.commit("UPDATENOTIFICATION", {
+          userId: this.$store.getters.getLoggedUser.id,
+          userName: this.$store.getters.getLoggedUser.username,
+          state: 1,
+          serviceName: this.selectedService.name,
+          menuName: this.selectedMenu.name,
+
+        });
+
         Swal.fire({
           title: "Pedido efetuado com sucesso!",
           icon: "success"
