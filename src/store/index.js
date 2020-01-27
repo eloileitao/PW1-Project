@@ -51,11 +51,20 @@ export default new Vuex.Store({
         selected: false
       }
     ],
-    users: [{
+    users: [
+      {
       id: 0,
       username: "admin",
       password: "123",
       type: 1
+    },
+    {
+      id: 1,
+      email: "joao@gmail.com",
+      username: "joao",
+      password: "123",
+      foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTEFF6tCXWJuWRLxP0Ovu785xFo3oiw_kKf0ZRJCIGH0jbIFvo1",
+      type: 3
     }
 
     ],

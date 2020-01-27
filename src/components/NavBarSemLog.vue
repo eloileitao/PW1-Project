@@ -50,7 +50,7 @@
             <v-list>
               <v-list-item v-if="getLoggedUser().type==3">
                 <v-list-item-title >
-                  <v-btn text>Perfil</v-btn>
+                  <router-link :to="{name:'profile'}" tag="button"><v-btn text>Perfil</v-btn></router-link>
                 </v-list-item-title>
               </v-list-item>
               <v-list-item v-if="getLoggedUser().type==3">
