@@ -109,11 +109,10 @@ export default {
         .then(result => {
           if (result.value) {
             swalButtons.fire("Orçamento enviado com sucesso", "", "success");
-            
 
-           for(let i = 0; i < this.requests.length; i++){
+            for (let i = 0; i < this.requests.length; i++) {
               if (this.requests[i].id === id) {
-                console.log(this.requests[i])
+                console.log(this.requests[i]);
                 this.$store.commit("ADDREQUESTTOUSER", {
                   id: this.$store.getters.getRequestToUserLastId,
                   idUser: this.requests[i].userId,
@@ -121,22 +120,17 @@ export default {
                   serviceName: this.requests[i].serviceName,
                   menuName: this.requests[i].menuName,
                   budget: this.budget[i],
-                  state: 2 
-                 /*  date: this.datePicker,
+                  state: 2
+                  /*  date: this.datePicker,
                   time: this.timePicker,
                   vestuario: this.selectedVestuario.name */
-                 }); 
+                });
 
                 this.requests = this.requests.filter(
-              request => request.id !== id
-               );
+                  request => request.id !== id
+                );
               }
-              }
-
-              
-            
-            
-           
+            }
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel

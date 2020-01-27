@@ -11,7 +11,7 @@
         <th>Nome do Serviço Pedido</th>
         <th>Nome do Menu Pedido</th>
         <th>Montante a Pagar</th>
-        <th>Ações</th>
+        <th>Estado</th>
       </tr>
       <tr v-for="userRequest in userRequests" :key="userRequest.id">
         <td>{{ userRequest.id }}</td>
@@ -19,7 +19,10 @@
         <td>{{ userRequest.menuName }}</td>
         <td>{{ userRequest.budget }}</td>
         <td>
-          <v-btn small color="error">Pagar</v-btn>
+          
+          <v-btn v-if="userRequest.state == 1" small color="error">Em Analise</v-btn>
+          <v-btn v-if="userRequest.state == 2" small color="error">Pagar</v-btn>
+          <v-btn v-if="userRequest.state == 3" small color="error">Concluído</v-btn>
         </td>
       </tr>
     </table>
