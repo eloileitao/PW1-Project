@@ -155,7 +155,8 @@ export default new Vuex.Store({
         menuName: payload.menuName,
         date: payload.date,
         time: payload.time,
-        vestuario: payload.vestuario
+        vestuario: payload.vestuario,
+        extra:payload.extra,
       })
     },
     UPDATENOTIFICATION: (state, payload) => {

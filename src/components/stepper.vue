@@ -18,38 +18,43 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step step="3" @click="e1 = 3">
+        <v-stepper-step :complete="e1 > 3" step="3" @click="e1 = 3">
           <v-btn text>Data e hora</v-btn>
         </v-stepper-step>
         <v-divider></v-divider>
 
-        <v-stepper-step step="4" @click="e1 = 4">
+        <v-stepper-step :complete="e1 > 4" step="4" @click="e1 = 4">
           <v-btn text>Vestuário</v-btn>
+        </v-stepper-step>
+        <v-divider></v-divider>
+
+        <v-stepper-step step="5" @click="e1 = 5">
+          <v-btn text>Extras</v-btn>
         </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <v-card class="mb-12" flat>
-            <v-row justify="space-between">
-              <v-col v-for="service in services" v-bind:key="service.id" md="3" class="ma-5">
-                <div v-bind:class="{selected:service.selected}">
-                  <v-hover v-slot:default="{ hover }">
-                    <v-card color="grey lighten-4" height="150 px" outlined flat>
-                      <v-img :aspect-ratio="16/9" :src="service.imgLink">
-                        <div
-                          v-if="hover || service.selected==true"
-                          class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
-                          style="height: 100%;"
-                          v-on:click="setSelectedService(service.id)"
-                        >{{service.name}}</div>
-                      </v-img>
-                    </v-card>
-                  </v-hover>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card>
+          <!-- <v-card class="mb-12" flat> -->
+          <v-row class="justify-center">
+            <v-col v-for="service in services" v-bind:key="service.id" md="3" class="ma-5">
+              <div v-bind:class="{selected:service.selected}">
+                <v-hover v-slot:default="{ hover }">
+                  <v-card color="grey lighten-4" height="150 px" outlined flat>
+                    <v-img :aspect-ratio="16/9" :src="service.imgLink">
+                      <div
+                        v-if="hover || service.selected==true"
+                        class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
+                        style="height: 100%;"
+                        v-on:click="setSelectedService(service.id)"
+                      >{{service.name}}</div>
+                    </v-img>
+                  </v-card>
+                </v-hover>
+              </div>
+            </v-col>
+          </v-row>
+          <!-- </v-card> -->
 
           <v-btn color="primary" @click="e1=2">Continue</v-btn>
 
@@ -57,26 +62,26 @@
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <v-card class="mb-12" flat>
-            <v-row justify="space-between">
-              <v-col v-for="menu in menus" v-bind:key="menu.id" md="3" class="ma-5">
-                <div v-bind:class="{selected:menu.selected}">
-                  <v-hover v-slot:default="{ hover }">
-                    <v-card color="grey lighten-4" height="150 px" outlined>
-                      <v-img :aspect-ratio="16/9" :src="menu.imgLink">
-                        <div
-                          v-if="hover || menu.selected==true"
-                          class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
-                          style="height: 100%;"
-                          v-on:click="setSelectedMenu(menu.id)"
-                        >{{menu.name}}</div>
-                      </v-img>
-                    </v-card>
-                  </v-hover>
-               </div>
-              </v-col>
-            </v-row>
-          </v-card>
+          <!-- <v-card class="mb-12" flat> -->
+          <v-row class="justify-center">
+            <v-col v-for="menu in menus" v-bind:key="menu.id" md="3" class="ma-5">
+              <div v-bind:class="{selected:menu.selected}">
+                <v-hover v-slot:default="{ hover }">
+                  <v-card color="grey lighten-4" height="150 px" outlined>
+                    <v-img :aspect-ratio="16/9" :src="menu.imgLink">
+                      <div
+                        v-if="hover || menu.selected==true"
+                        class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
+                        style="height: 100%;"
+                        v-on:click="setSelectedMenu(menu.id)"
+                      >{{menu.name}}</div>
+                    </v-img>
+                  </v-card>
+                </v-hover>
+              </div>
+            </v-col>
+          </v-row>
+          <!-- </v-card> -->
 
           <v-btn color="primary" @click="e1 = 3">Continue</v-btn>
 
@@ -84,22 +89,22 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <v-card class="mb-12" flat>
-            <v-row>
-              <v-col class="ma-5">
-                <v-date-picker
-                  v-model="datePicker"
-                  year-icon="mdi-calendar-blank"
-                  prev-icon="mdi-skip-previous"
-                  next-icon="mdi-skip-next"
-                  full-width
-                ></v-date-picker>
-              </v-col>
-              <v-col class="ma-5">
-                <v-time-picker v-model="timePicker" color="green lighten-1" full-width></v-time-picker>
-              </v-col>
-            </v-row>
-          </v-card>
+          <!-- <v-card class="mb-12" flat> -->
+          <v-row class="justify-center">
+            <v-col md="3" class="ma-5">
+              <v-date-picker
+                v-model="datePicker"
+                year-icon="mdi-calendar-blank"
+                prev-icon="mdi-skip-previous"
+                next-icon="mdi-skip-next"
+                full-width
+              ></v-date-picker>
+            </v-col>
+            <v-col md="3" class="ma-5">
+              <v-time-picker v-model="timePicker" color="green lighten-1" full-width></v-time-picker>
+            </v-col>
+          </v-row>
+          <!-- </v-card> -->
 
           <v-btn color="primary" @click="e1=4">Seguinte</v-btn>
 
@@ -107,13 +112,45 @@
         </v-stepper-content>
 
         <v-stepper-content step="4" flat>
-          <v-card class="mb-12" flat>
-            <v-row justify="space-between">
-              <v-col v-for="vestuario in vestuarios" v-bind:key="vestuario.id" md="3" class="ma-5">
+          <!-- <v-card class="mb-12" flat> -->
+          <v-row class="justify-center">
+            <v-col v-for="vestuario in vestuarios" v-bind:key="vestuario.id" md="3" class="ma-5">
+              <div v-bind:class="{selected:vestuario.selected}">
+                <v-hover v-slot:default="{ hover }">
+                  <v-card color="grey lighten-4" height="150 px" outlined>
+                    <v-img :aspect-ratio="16/9" :src="vestuario.img">
+                      <div
+                        v-if="hover || vestuario.selected==true"
+                        class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
+                        style="height: 100%;"
+                        v-on:click="setSelectedVestuario(vestuario.id)"
+                      >{{vestuario.name}}</div>
+                    </v-img>
+                  </v-card>
+                </v-hover>
+              </div>
+            </v-col>
+          </v-row>
+          <!-- </v-card> -->
+          <br />
+          <br />
+
+          <v-btn color="primary" @click="e1=5">Seguinte</v-btn>
+
+          <v-btn text>Cancel</v-btn>
+        </v-stepper-content>
+
+        <v-stepper-content step="5" flat>
+          <!-- <v-card class="mb-12" flat> -->
+          <v-row class="justify-center">
+            <v-col cols="12" md="6">
+              <v-textarea solo name="input-7-4" label="Solo textarea" v-model="extras"></v-textarea>
+            </v-col>
+            <!-- <v-col v-for="vestuario in vestuarios" v-bind:key="vestuario.id" md="3" class="ma-5" >
                 <div v-bind:class="{selected:vestuario.selected}">
                   <v-hover v-slot:default="{ hover }">
                     <v-card color="grey lighten-4" height="150 px" outlined>
-                      <v-img :aspect-ratio="16/9" :src="vestuario.img" style="margin-top: 25px">
+                      <v-img  :aspect-ratio="16/9" :src="vestuario.img" >
                         <div
                           v-if="hover || vestuario.selected==true"
                           class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
@@ -124,9 +161,11 @@
                     </v-card>
                   </v-hover>
                 </div>
-              </v-col>
-            </v-row>
-          </v-card>
+            </v-col>-->
+          </v-row>
+          <!-- </v-card> -->
+          <br />
+          <br />
 
           <v-btn color="primary" @click="submitNewRequest()">Submeter Pedido</v-btn>
 
@@ -162,7 +201,8 @@ export default {
       request: null,
       selectedMenu: null,
       selectedService: null,
-      selectedVestuario: null
+      selectedVestuario: null,
+      extras: ""
     };
   },
   created() {
@@ -219,6 +259,7 @@ export default {
       }
     },
     submitNewRequest() {
+      console.log(this.extras)
       if (!this.menus.some(menu => menu.selected == true)) {
         //this.selectedMenu=this.menus.filter(menu=> menu.selected==true)
 
@@ -257,7 +298,8 @@ export default {
           menuName: this.selectedMenu.name,
           date: this.datePicker,
           time: this.timePicker,
-          vestuario: this.selectedVestuario.name
+          vestuario: this.selectedVestuario.name,
+          extras:this.extras,
         });
 
         this.$store.commit("UPDATENOTIFICATION", {
@@ -265,14 +307,15 @@ export default {
           userName: this.$store.getters.getLoggedUser.username,
           state: 1,
           serviceName: this.selectedService.name,
-          menuName: this.selectedMenu.name,
-
+          menuName: this.selectedMenu.name
         });
 
         Swal.fire({
           title: "Pedido efetuado com sucesso!",
           icon: "success"
-        });
+        }).then(this.$router.push({name:"home"}));
+
+        
       }
     }
   }
