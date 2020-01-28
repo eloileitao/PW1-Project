@@ -128,7 +128,7 @@ th {
 
 footer {
      position: fixed;
-    height: 200px;
+    height: 150px;
     bottom: 0px;
     left: 0px;
     right: 0px;

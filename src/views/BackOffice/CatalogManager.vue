@@ -53,6 +53,7 @@
         </td>
       </tr>
     </table>
+    <Footer></Footer>
   </v-content>
 </template>
 
@@ -102,9 +103,9 @@ th {
   justify-content: center;
 }
 
-footer {
+Footer {
    position: fixed;
-    height: 200px;
+    height: 150px;
     bottom: 0px;
     left: 0px;
     right: 0px;
@@ -115,10 +116,12 @@ footer {
 
 <script>
 import NavbarSemLog from "@/components/NavBarSemLog.vue";
+import Footer from "@/components/footer.vue";
 import Swal from "sweetalert2";
 export default {
   components: {
-    NavbarSemLog
+    NavbarSemLog,
+    Footer
   },
 
   data: function() {

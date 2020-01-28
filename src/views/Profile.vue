@@ -44,19 +44,17 @@
           </v-card-actions>
         </v-card>
       </v-layout>
-      <Footer></Footer>
+      
     </v-container>
+    <Footer></Footer>
   </div>
 </template>
 
 
 <style scoped>
 footer {
-    position: fixed;
-    height: 200px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+    height: 150px;
+    margin-top: 10px;
     margin-bottom: 0px;
 }
 
