@@ -78,7 +78,10 @@ export default new Vuex.Store({
       menuName: "Menu A",
       date: "2020-01-30",
       time: "06:35",
-      vestuario: "Formal"
+      vestuario: "Formal",
+      extras: "Musica",
+      budget: 0,
+      state: 1
     },
     {
       id: 1,
@@ -88,7 +91,10 @@ export default new Vuex.Store({
       menuName: "Menu A",
       date: "2020-01-30",
       time: "06:35",
-      vestuario: "Formal"
+      vestuario: "Formal",
+      extras: "Musica",
+      budget: 0,
+      state: 1
     }
     ],
     services: [
@@ -128,7 +134,9 @@ export default new Vuex.Store({
     ],
     notifications: [
       
-    ]
+    ],
+
+    reviews: []
 
   },
   mutations: {
@@ -200,6 +208,16 @@ export default new Vuex.Store({
         selected: false,
       })
     },
+    ADDREVIEW: (state, payload) => {
+      state.reviews.push({
+        id: payload.id,
+        userId: payload.userId,
+        userName: payload.userName,
+        rating: payload.rating,
+        comment: payload.comment,
+
+      })
+    },
   },
   getters: {
     getLogin: (state) => (username, password) => {
@@ -241,6 +259,13 @@ export default new Vuex.Store({
       }
       return lastId
     },
+    getReviewLastId: (state) => {
+      let lastId = 0
+      if (state.reviews.length > 0) {
+        lastId = state.reviews[state.reviews.length - 1].id + 1
+      }
+      return lastId
+    },
     getLoggedUser: (state) => {
       return state.loggedUser;
     },
@@ -251,7 +276,7 @@ export default new Vuex.Store({
       return state.menus;
     },
     getUserRequests: (state) => {
-      return state.userRequests;
+      return state.requests;
     },
     getVestuarios: (state) => {
       return state.vestuarios;

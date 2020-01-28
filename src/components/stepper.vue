@@ -300,6 +300,8 @@ export default {
           time: this.timePicker,
           vestuario: this.selectedVestuario.name,
           extras:this.extras,
+          budget: 0,
+          state: 1
         });
 
         this.$store.commit("UPDATENOTIFICATION", {

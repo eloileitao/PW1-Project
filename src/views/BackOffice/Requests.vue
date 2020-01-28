@@ -26,12 +26,22 @@
                 <v-card-actions>
                   <v-btn
                     color="primary"
+                    v-if="request.state == 1"
                     @click="sendBudget(request.id), updateNotification(request.userId)"
                     class="ma-1"
                   >
-                    Accept
-                    <v-icon dark small class="pa-1">mdi-checkbox-marked-circle</v-icon>
+                    Enviar
+                    <v-icon dark small class="pa-1">mdi-send</v-icon>
                   </v-btn>
+                  <v-btn
+                    color="success"
+                    v-if="request.state == 3"
+                    @click="endEvent(request.id)"
+                  >Concluido</v-btn>
+                   <v-btn
+                    color="error"
+                    v-if="request.state == 4"
+                  >Locked<v-icon dark small class="pa-1">mdi-lock</v-icon></v-btn>
                 </v-card-actions>
               </v-col>
             </v-row>
@@ -98,6 +108,47 @@ export default {
         }
       }
     },
+
+    endEvent(id){
+       const swalButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "confirm-button-class",
+          cancelButton: "cancel-button-class"
+        },
+        buttonsStyling: true
+      });
+
+      swalButtons
+        .fire({
+          title: "Deseja dar este evento como terminado?",
+          text: "Não vai ser possivel reverter esta ação",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Sim",
+          confirmButtonColor: "#009933",
+          cancelButtonText: "Não",
+          cancelButtonColor: "#990000",
+          reverseButtons: true
+        })
+        .then(result => {
+          if (result.value) {
+            swalButtons.fire("Evento terminado com sucesso", "", "success");
+            console.log("id");
+ 
+            for (let i = 0; i < this.requests.length; i++) {
+              if (this.requests[i].id === id) {
+                  this.requests[i].state = 4
+              }
+            } 
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalButtons.fire("Cancelado", "A sua ação foi cancelada", "error");
+          }
+        });
+    },
+    
     sendBudget(id) {
       const swalButtons = Swal.mixin({
         customClass: {
@@ -127,22 +178,8 @@ export default {
             for (let i = 0; i < this.requests.length; i++) {
               if (this.requests[i].id === id) {
                 console.log(this.requests[i]);
-                this.$store.commit("ADDREQUESTTOUSER", {
-                  id: this.$store.getters.getRequestToUserLastId,
-                  idUser: this.requests[i].userId,
-                  userName: this.requests[i].userName,
-                  serviceName: this.requests[i].serviceName,
-                  menuName: this.requests[i].menuName,
-                  budget: this.budget[i],
-                  state: 2
-                  /*  date: this.datePicker,
-                  time: this.timePicker,
-                  vestuario: this.selectedVestuario.name */
-                });
-
-                this.requests = this.requests.filter(
-                  request => request.id !== id
-                );
+                (this.requests[i].budget = this.budget[i]),
+                  (this.requests[i].state = 2);
               }
             }
           } else if (

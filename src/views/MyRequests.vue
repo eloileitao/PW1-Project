@@ -4,7 +4,7 @@
     <div class="Div">
       <h1 style="color:darkorange">Meus Pedidos</h1>
     </div>
-  
+
     <table>
       <tr>
         <th>ID do Pedido</th>
@@ -19,14 +19,64 @@
         <td>{{ userRequest.menuName }}</td>
         <td>{{ userRequest.budget }}</td>
         <td>
-          
           <v-btn v-if="userRequest.state == 1" small color="error">Em Analise</v-btn>
-          <v-btn v-if="userRequest.state == 2" small color="error">Pagar</v-btn>
-          <v-btn v-if="userRequest.state == 3" small color="error">Concluído</v-btn>
+          <v-btn
+            v-if="userRequest.state == 2"
+            @click="payment(userRequest.id)"
+            small
+            color="primary"
+          >Pagar</v-btn>
+          <v-row justify="center">
+            <v-dialog v-model="dialog" persistent max-width="600px">
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  v-if="userRequest.state == 4"
+                  small
+                  color="success"
+                  v-on="on"
+                >Partilhe a sua Experiência</v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Review</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <div class="text-left">
+                           <h2>Deixe o seu rating e o seu comentário. </h2>
+                             <h5>Poderá encontrar todos os rating e comentarios na página de Galeria</h5>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <div class="text-left">
+                           <h5>Pontuação:</h5>
+                          <v-rating v-model="rating"></v-rating>
+                        </div>
+                      </v-col>
+                      <v-col cols="12">
+                        <h5>Comentario:</h5>
+                         <v-textarea solo v-model="comment" name="input-7-4" label="Escreva aqui o seu comentário"></v-textarea>
+                      </v-col>
+                     
+                    </v-row>
+                  </v-container>
+                  <small>*todos os comentario e ratings que submeter não poderão ser editados futuramente.</small>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                  <v-btn color="blue darken-1" text @click="dialog = false, reviewOrder(userRequest.id)">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
         </td>
       </tr>
     </table>
-    <Footer ></Footer>
+
+    <Footer></Footer>
   </div>
 </template>
 
@@ -76,7 +126,7 @@ th {
   margin-left: 20px;
 }
 
-Footer{
+footer {
   margin-top: 250px;
 }
 </style>
@@ -92,20 +142,21 @@ export default {
   },
   data: function() {
     return {
-      userRequests: this.$store.state.userRequests,
+      userRequests: this.$store.state.requests,
+      dialog: false,
+      rating: 0,
+      comment: ""
     };
   },
 
   created() {
-    this.userRequests = this.$store.getters.getUserRequests.filter(request => request.idUser === this.$store.getters.getLoggedUser.id);
-  //getService($route.params.serviceId)
-  //this.serviceId=this.$route.params.serviceId,
-  console.log(this.menus)
-    },
+    this.userRequests = this.$store.getters.getUserRequests.filter(
+      request => request.userId === this.$store.getters.getLoggedUser.id
+    );
+  },
 
   methods: {
-    
-    removeUser(id) {
+    payment(id) {
       const swalButtons = Swal.mixin({
         customClass: {
           confirmButton: "confirm-button-class",
@@ -116,8 +167,8 @@ export default {
 
       swalButtons
         .fire({
-          title: "Deseja mesmo remover este utilizador?",
-          text: "Não vai ser possivel reverter esta ação",
+          title: "Deseja mesmo proceder com o pagamento?",
+          text: "Verifique se concorda com o montante mostrado",
           icon: "warning",
           showCancelButton: true,
           confirmButtonText: "Sim",
@@ -128,45 +179,14 @@ export default {
         })
         .then(result => {
           if (result.value) {
-            swalButtons.fire("Utilizador removido com sucesso", "", "success");
-            this.users = this.users.filter(user => user.id !== id);
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalButtons.fire("Cancelado", "A sua ação foi cancelada", "error");
-          }
-        });
-    },
-
-    removeAdmin(id) {
-      const swalButtons = Swal.mixin({
-        customClass: {
-          confirmButton: "confirm-button-class",
-          cancelButton: "cancel-button-class"
-        },
-        buttonsStyling: true
-      });
-
-      swalButtons
-        .fire({
-          title: "Deseja mesmo remover este utilizador da posição de admin?",
-          text: "Não vai ser possivel reverter esta ação",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Sim",
-          confirmButtonColor: "#009933",
-          cancelButtonText: "Não",
-          cancelButtonColor: "#990000",
-          reverseButtons: true
-        })
-        .then(result => {
-          if (result.value) {
-            swalButtons.fire("Utilizador removido com sucesso", "", "success");
-            for (let i = 0; i < this.users.length; i++) {
-              if (this.users[i].id === id) {
-                this.users[i].type = 3;
-                console.log(this.users[i].type);
+            swalButtons.fire(
+              "Pagamamento realizado com sucesso",
+              "",
+              "success"
+            );
+            for (let i = 0; i < this.userRequests.length; i++) {
+              if (this.userRequests[i].id === id) {
+                this.userRequests[i].state = 3;
               }
             }
           } else if (
@@ -177,58 +197,17 @@ export default {
           }
         });
     },
-    addAdmin(id) {
-      const swalButtons = Swal.mixin({
-        customClass: {
-          confirmButton: "confirm-button-class",
-          cancelButton: "cancel-button-class"
-        },
-        buttonsStyling: true
-      });
 
-      swalButtons
-        .fire({
-          title: "Deseja mesmo tornar este utilizador em admin?",
-          text: "Não vai ser possivel reverter esta ação",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Sim",
-          confirmButtonColor: "#009933",
-          cancelButtonText: "Não",
-          cancelButtonColor: "#990000",
-          reverseButtons: true
-        })
-        .then(result => {
-          if (result.value) {
-            swalButtons.fire("Utilizador removido com sucesso", "", "success");
-            for (let i = 0; i < this.users.length; i++) {
-              if (this.users[i].id === id) {
-                this.users[i].type = 1;
-                console.log(this.users[i].type);
-              }
-            }
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalButtons.fire("Cancelado", "A sua ação foi cancelada", "error");
-          }
+    reviewOrder(id) {
+      this.$store.commit("ADDREVIEW", {
+          id: this.$store.getters.getReviewLastId,
+          userId: this.$store.getters.getLoggedUser.id,
+          userName: this.$store.getters.getLoggedUser.username,
+          rating: this.rating,
+          comment: this.comment
         });
-    },
-    filterUsersByName() {
-       this.filteredUsers = [];
-        let filterNameResult = false;
-      for (let i = 0; i < this.users.length; i++) {
-           this.username = this.users[i].username
-        let upperName = this.username.toUpperCase();
-        let upperFilterName = this.nameFilter.toUpperCase();
-
-        filterNameResult = upperName.includes(upperFilterName);
-
-        if (filterNameResult) {
-          this.filteredUsers.push(this.users[i]);
-        }
-      }
+         this.userRequests = this.userRequests.filter(request => request.id !== id);
+       
     }
   }
 };
