@@ -103,8 +103,14 @@ th {
 }
 
 footer {
-  margin-top: 250px;
+   position: fixed;
+    height: 200px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
 }
+
 </style>
 
 <script>
