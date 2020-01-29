@@ -58,22 +58,50 @@ const routes = [
   {
    path: "/userbackoffices",
    name: "user-backoffice",
-   component: UserBackOffice
+   component: UserBackOffice,
+   beforeEnter: (to, from, next) => {
+     if(store.state.loggedUser.id== 0){
+       next()
+     }else{
+       next("/");
+     }
+   }
   },
   {
     path: "/requestbackoffices",
     name: "request-backoffice",
-    component: RequestsBackOffice
+    component: RequestsBackOffice,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedUser.id== 0){
+        next()
+      }else{
+        next("/");
+      }
+    }
    },
    {
     path: "/catalogbackoffices",
     name: "catalog-backoffice",
-    component: CatalogBackOffice
+    component: CatalogBackOffice,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedUser.id== 0){
+        next()
+      }else{
+        next("/");
+      }
+    }
    },
    {
     path: "/menusbackoffices",
     name: "menus-backoffice",
-    component: MenusBackOffice
+    component: MenusBackOffice,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedUser.id== 0){
+        next()
+      }else{
+        next("/");
+      }
+    }
    },
    {
     path: "/services",
@@ -83,7 +111,14 @@ const routes = [
    {
     path: "/myrequests",
     name: "myrequests",
-    component: MyRequests
+    component: MyRequests,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedUser.id!= -1){
+        next()
+      }else{
+        next("/");
+      }
+    }
    },
    {
     path: "/galery",
@@ -93,7 +128,14 @@ const routes = [
    {
     path: "/profile",
     name: "profile",
-    component: Profile
+    component: Profile,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedUser.id!= -1){
+        next()
+      }else{
+        next("/");
+      }
+    }
    },
    {
     path: "/menu/:serviceId",
