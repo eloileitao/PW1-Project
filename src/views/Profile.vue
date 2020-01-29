@@ -30,7 +30,7 @@
                     <h1>Necessita ajuda?</h1> <br>
                     <h3>Deseja alterar a sua informação?</h3>
                     <br>
-                    <p>A sua informação atua encontra-se exposta no interior de cada caixa de texto, para puder alterar so
+                    <p>A sua informação atual encontra-se exposta no interior de cada caixa de texto, para puder alterar so
                       necessita de primir a caixa de texto e escrever a sua nova indormação. De seguida prima o botão "Alterar Informação" e 
                       ja está!
                     </p>
@@ -52,11 +52,7 @@
 
 
 <style scoped>
-footer {
-    height: 150px;
-    margin-top: 10px;
-    margin-bottom: 0px;
-}
+
 
 .center {
   margin-top: 25px;

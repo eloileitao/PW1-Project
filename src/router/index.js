@@ -7,6 +7,7 @@ import About from "@/views/About.vue"
 import services from "@/views/Catalog.vue";
 import Menu from "@/views/Menu.vue";
 import MyRequests from "@/views/MyRequests.vue";
+import Galery from "@/views/Galeria.vue";
 import Profile from "@/views/Profile.vue";
 import novoPedido from "@/views/novoPedido.vue";
 import UserBackOffice from "@/views/BackOffice/User.vue"
@@ -83,6 +84,11 @@ const routes = [
     path: "/myrequests",
     name: "myrequests",
     component: MyRequests
+   },
+   {
+    path: "/galery",
+    name: "galery",
+    component: Galery
    },
    {
     path: "/profile",

@@ -11,12 +11,14 @@
             <v-list-item-content>
               <div class="overline">{{request.id}}</div>
               <v-list-item-title class="headline mb-1">{{request.serviceName}}</v-list-item-title>
-              <v-list-item-subtitle>{{request.menuName}}</v-list-item-subtitle>
-              <div class="subheading">{{request.date}}</div>
-              <div class="subheading">{{request.time}}</div>
+              <v-list-item-subtitle>{{request.menuName}}</v-list-item-subtitle> 
+             <v-list-item-subtitle>{{request.date}}</v-list-item-subtitle> 
+              <v-list-item-subtitle>{{request.time}}</v-list-item-subtitle> 
+              <v-list-item-subtitle>Extras: {{request.extras}}</v-list-item-subtitle>
             </v-list-item-content>
             <v-card-text>
               <div class="subheading">Utilizador: {{request.userName}}</div>
+              <div class="subheading" v-if="requests.local !== '' ">Local: {{request.local}}</div>
             </v-card-text>
             <v-row>
               <v-col cols="6">

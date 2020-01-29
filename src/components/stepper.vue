@@ -28,13 +28,22 @@
         </v-stepper-step>
         <v-divider></v-divider>
 
-        <v-stepper-step step="5" @click="e1 = 5">
+        <v-stepper-step :complete="e1 > 4" step="5" @click="e1 = 5">
+          <v-btn text>Local</v-btn>
+        </v-stepper-step>
+        <v-divider></v-divider>
+
+        <v-stepper-step step="6" @click="e1 = 6">
           <v-btn text>Extras</v-btn>
         </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
         <v-stepper-content step="1">
+          <h4 class="center">Que tipo de serviço deseja?</h4>
+          <h5
+            class="center"
+          >Pode saber mais sobre os nosso serviços e menus a nossa página de serviços</h5>
           <!-- <v-card class="mb-12" flat> -->
           <v-row class="justify-center">
             <v-col v-for="service in services" v-bind:key="service.id" md="3" class="ma-5">
@@ -62,6 +71,7 @@
         </v-stepper-content>
 
         <v-stepper-content step="2">
+          <h4 class="center">Qual dos menus vai desejar?</h4>
           <!-- <v-card class="mb-12" flat> -->
           <v-row class="justify-center">
             <v-col v-for="menu in menus" v-bind:key="menu.id" md="3" class="ma-5">
@@ -89,6 +99,7 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
+          <h4 class="center">Escolha a o dia e a hora do seu evento!</h4>
           <!-- <v-card class="mb-12" flat> -->
           <v-row class="justify-center">
             <v-col md="3" class="ma-5">
@@ -112,6 +123,8 @@
         </v-stepper-content>
 
         <v-stepper-content step="4" flat>
+          <h4 class="center">Que tipo de vestuário deseja que os nossos colaboradores utilizem?</h4>
+          <br />
           <!-- <v-card class="mb-12" flat> -->
           <v-row class="justify-center">
             <v-col v-for="vestuario in vestuarios" v-bind:key="vestuario.id" md="3" class="ma-5">
@@ -144,26 +157,33 @@
           <!-- <v-card class="mb-12" flat> -->
           <v-row class="justify-center">
             <v-col cols="12" md="6">
-              <v-textarea solo name="input-7-4" label="Solo textarea" v-model="extras"></v-textarea>
+              <h4>Onde irá decorrer este evento?</h4>
+              <h5>Nós possuimos espaços do qual pode usufruir mas se preferir escolher o espaço por favor clique no seletor e escreva no campo abaixo a morada que deseja.</h5>
+              <br />
+              <v-row align="center">
+                <v-checkbox v-model="enabled" hide-details class="shrink mr-2 mt-0"></v-checkbox>
+                <v-text-field :disabled="!enabled" v-model="local" label="Insira a morada aqui."></v-text-field>
+              </v-row>
             </v-col>
-            <!-- <v-col v-for="vestuario in vestuarios" v-bind:key="vestuario.id" md="3" class="ma-5" >
-                <div v-bind:class="{selected:vestuario.selected}">
-                  <v-hover v-slot:default="{ hover }">
-                    <v-card color="grey lighten-4" height="150 px" outlined>
-                      <v-img  :aspect-ratio="16/9" :src="vestuario.img" >
-                        <div
-                          v-if="hover || vestuario.selected==true"
-                          class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-1 white--text"
-                          style="height: 100%;"
-                          v-on:click="setSelectedVestuario(vestuario.id)"
-                        >{{vestuario.name}}</div>
-                      </v-img>
-                    </v-card>
-                  </v-hover>
-                </div>
-            </v-col>-->
           </v-row>
-          <!-- </v-card> -->
+          <br />
+          <br />
+
+          <v-btn color="primary" @click="e1=6">Seguinte</v-btn>
+
+          <v-btn text>Cancel</v-btn>
+        </v-stepper-content>
+
+        <v-stepper-content step="6" flat>
+          <!-- <v-card class="mb-12" flat> -->
+          <v-row class="justify-center">
+            <v-col cols="12" md="6">
+              <h4>Deseja algo que não está exposto no nosso website? Algo especial?</h4>
+              <h5>Escreva no campo abaixo o que deseja acrescentar ao seu pedido (ex Múscia, Decoração)</h5>
+              <br />
+              <v-textarea solo name="input-7-4" label="Insira texto aqui." v-model="extras"></v-textarea>
+            </v-col>
+          </v-row>
           <br />
           <br />
 
@@ -179,7 +199,13 @@
   </v-content>
 </template>
 
-
+<style scoped>
+.center {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+</style>
 
 <script>
 import Swal from "sweetalert2";
@@ -202,7 +228,9 @@ export default {
       selectedMenu: null,
       selectedService: null,
       selectedVestuario: null,
-      extras: ""
+      extras: "",
+      local: "sem local",
+      enabled: false
     };
   },
   created() {
@@ -259,7 +287,7 @@ export default {
       }
     },
     submitNewRequest() {
-      console.log(this.extras)
+      console.log(this.extras);
       if (!this.menus.some(menu => menu.selected == true)) {
         //this.selectedMenu=this.menus.filter(menu=> menu.selected==true)
 
@@ -299,7 +327,8 @@ export default {
           date: this.datePicker,
           time: this.timePicker,
           vestuario: this.selectedVestuario.name,
-          extras:this.extras,
+          extras: this.extras,
+          local: this.local,
           budget: 0,
           state: 1
         });
@@ -315,9 +344,7 @@ export default {
         Swal.fire({
           title: "Pedido efetuado com sucesso!",
           icon: "success"
-        }).then(this.$router.push({name:"home"}));
-
-        
+        }).then(this.$router.push({ name: "home" }));
       }
     }
   }

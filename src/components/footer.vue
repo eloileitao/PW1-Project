@@ -27,11 +27,18 @@
   </v-footer>
 </template>
 
-<style>
+<style scoped>
 p {
   margin-top: -17px;
 }
+
+footer {
+ height: 200px;
+  flex-shrink: 0;
+}
 </style>
+
+
 
 <script>
 export default {

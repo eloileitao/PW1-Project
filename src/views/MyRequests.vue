@@ -12,12 +12,19 @@
         <th>Nome do Menu Pedido</th>
         <th>Montante a Pagar</th>
         <th>Estado</th>
+        <th>Ações</th>
       </tr>
       <tr v-for="userRequest in userRequests" :key="userRequest.id">
         <td>{{ userRequest.id }}</td>
         <td>{{ userRequest.serviceName }}</td>
         <td>{{ userRequest.menuName }}</td>
         <td>{{ userRequest.budget }}</td>
+        <td>
+          <h5 v-if="userRequest.state == 1" small color="error">Em Analise</h5>
+          <h5 v-if="userRequest.state == 2" small color="error">Pagamento em Falta</h5>
+          <h5 v-if="userRequest.state == 3" small color="error">Pagamento Conluído</h5>
+          <h5 v-if="userRequest.state == 4" small color="error">Evento Concluído</h5>
+        </td>
         <td>
           <v-btn v-if="userRequest.state == 1" small color="error">Em Analise</v-btn>
           <v-btn
@@ -66,8 +73,8 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                  <v-btn color="blue darken-1" text @click="dialog = false, reviewOrder(userRequest.id)">Save</v-btn>
+                  <v-btn color="blue darken-1" text @click="dialog = false">Fechar</v-btn>
+                  <v-btn color="blue darken-1" text @click="dialog = false, reviewOrder(userRequest.id)">Submeter Avaliação</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>

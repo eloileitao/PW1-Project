@@ -12,7 +12,7 @@
 
         <v-toolbar-items>
           <router-link :to="{name:'services'}" tag="button"> <v-btn text>Serviços</v-btn></router-link>
-          <v-btn text>Galeria</v-btn>
+           <router-link :to="{name:'galery'}" tag="button"><v-btn text>Galeria</v-btn></router-link>
           <v-btn text>Sobre</v-btn>
             <router-link :to="{name:'login'}" tag="button" v-if="getLoggedUser().id==-1"><v-btn text>Login</v-btn></router-link>
           <!-- <buttonModalLogin v-if="getLoggedUser().id==-1"></buttonModalLogin> -->

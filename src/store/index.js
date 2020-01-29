@@ -80,6 +80,7 @@ export default new Vuex.Store({
       time: "06:35",
       vestuario: "Formal",
       extras: "Musica",
+      local: "sem local",
       budget: 0,
       state: 1
     },
@@ -93,6 +94,7 @@ export default new Vuex.Store({
       time: "06:35",
       vestuario: "Formal",
       extras: "Musica",
+      local: "R.rua",
       budget: 0,
       state: 1
     }
@@ -120,23 +122,20 @@ export default new Vuex.Store({
 
       }
     ],
-    userRequests: [
-      {
-        id: 0,
-        idUser: 1,
-        serviceName: "Coffe Break",
-        menuName: "Menu A",
-        userName: "joao",
-        budget: 50,
-        state: 2
-
-      }
-    ],
+   
     notifications: [
       
     ],
 
-    reviews: []
+    reviews: [
+      {
+        id:0,
+        userId: 1,
+        userName: "joao",
+        rating: 4,
+        comment: "Gostei do serviço"
+      }
+    ]
 
   },
   mutations: {
@@ -164,7 +163,9 @@ export default new Vuex.Store({
         date: payload.date,
         time: payload.time,
         vestuario: payload.vestuario,
+        state: payload.state,
         extra:payload.extra,
+        local: payload.local
       })
     },
     UPDATENOTIFICATION: (state, payload) => {
