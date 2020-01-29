@@ -9,7 +9,7 @@ export default new Vuex.Store({
       id: 0,
       idServico: 0,
       name: "Menu A",
-      desc:"",
+      desc: "",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },
@@ -17,7 +17,7 @@ export default new Vuex.Store({
       id: 1,
       idServico: 0,
       name: "Menu B",
-      desc:"",
+      desc: "",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },
@@ -25,7 +25,7 @@ export default new Vuex.Store({
       id: 2,
       idServico: 1,
       name: "Menu C",
-      desc:"",
+      desc: "",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },
@@ -33,19 +33,19 @@ export default new Vuex.Store({
       id: 3,
       idServico: 2,
       name: "Menu A",
-      desc:"",
+      desc: "",
       imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
       selected: false
     },],
     vestuarios: [
       {
-        id:0,
+        id: 0,
         name: "Formal",
         img: "https://i.pinimg.com/originals/a9/f3/d5/a9f3d5b95b612e63bb8c601aa0433612.jpg",
         selected: false
       },
       {
-        id:1,
+        id: 1,
         name: "Informal",
         img: "https://www.russums-shop.co.uk/files/uk/imagelibrary/subcategory/coloured-shirts.jpg",
         selected: false
@@ -53,51 +53,111 @@ export default new Vuex.Store({
     ],
     users: [
       {
-      id: 0,
-      username: "admin",
-      password: "123",
-      type: 1
-    },
-    {
-      id: 1,
-      email: "joao@gmail.com",
-      username: "joao",
-      password: "123",
-      foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTEFF6tCXWJuWRLxP0Ovu785xFo3oiw_kKf0ZRJCIGH0jbIFvo1",
-      type: 3
-    }
+        id: 0,
+        username: "admin",
+        password: "123",
+        type: 1
+      },
+      {
+        id: 1,
+        email: "joao@gmail.com",
+        username: "joao",
+        password: "123",
+        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTEFF6tCXWJuWRLxP0Ovu785xFo3oiw_kKf0ZRJCIGH0jbIFvo1",
+        type: 3
+      }
 
+    ],
+    achievements: [
+      {
+        id: 0,
+        tittle: "Primeiro Pedido",
+        desc: "Faça o seu primeiro pedido para receber 5 pontos!",
+        points: 5,
+        available: true,
+        progress: 0,
+      },
+      {
+        id: 1,
+        tittle: "Primeiro Pagamento",
+        desc: "Faça o seu primeiro pagamento para receber 5 pontos!",
+        points: 5,
+        available: true,
+        progress: 0,
+      },
+      {
+        id: 2,
+        tittle: "Primeira review",
+        desc: "Faça o seu primeiro pedido para receber 5 pontos!",
+        points: 5,
+        available: true,
+        progress: 0,
+      },
+      {
+        id: 3,
+        tittle: "Fazer 10 pagamentos",
+        desc: "Faça 10 pagamentos para receber 50 pontos!",
+        points: 50,
+        available: true,
+        progress: 0,
+      },
+      {
+        id: 4,
+        tittle: "Fazer 10 reviews",
+        desc: "Faça o seu primeiro pedido para receber 35‬ pontos!",
+        points: 35,
+        available: true,
+        progress: 0,
+      }
+    ],
+    rewards:[
+      {
+        id:0,
+        tittle:"Fazer um pedido de graça",
+        desc:"Junte 100‬ pontos para receber um pedido gratuito",
+        progress:0,
+        meta:200,
+        complete:false,
+      },
+      {
+        id:1,
+        tittle:"Receber um cupao de 20€",
+        desc:"Junte 100‬ pontos para receber um cupao de 20€",
+        progress:0,
+        meta:100,
+        complete:false,
+      }
     ],
     loggedUser: { id: -1 },
     requests: [
-    {
-      id: 0,
-      userId: 4,
-      userName: "marcia",
-      serviceName: "Coffe Break",
-      menuName: "Menu A",
-      date: "2020-01-30",
-      time: "06:35",
-      vestuario: "Formal",
-      extras: "Musica",
-      local: "sem local",
-      budget: 0,
-      state: 1
-    },
-    {
-      id: 1,
-      userId: 1,
-      userName: "joao",
-      serviceName: "Coffe Break",
-      menuName: "Menu A",
-      date: "2020-01-30",
-      time: "06:35",
-      vestuario: "Formal",
-      extras: "Musica",
-      local: "R.rua",
-      budget: 0,
-      state: 1
-    }
+      {
+        id: 0,
+        userId: 4,
+        userName: "marcia",
+        serviceName: "Coffe Break",
+        menuName: "Menu A",
+        date: "2020-01-30",
+        time: "06:35",
+        vestuario: "Formal",
+        extras: "Musica",
+        local: "sem local",
+        budget: 0,
+        state: 1
+      },
+      {
+        id: 1,
+        userId: 1,
+        userName: "joao",
+        serviceName: "Coffe Break",
+        menuName: "Menu A",
+        date: "2020-01-30",
+        time: "06:35",
+        vestuario: "Formal",
+        extras: "Musica",
+        local: "R.rua",
+        budget: 0,
+        state: 1
+      }
     ],
     services: [
       {
@@ -122,14 +182,14 @@ export default new Vuex.Store({
 
       }
     ],
-   
+
     notifications: [
-      
+
     ],
 
     reviews: [
       {
-        id:0,
+        id: 0,
         userId: 1,
         userName: "joao",
         rating: 4,
@@ -146,7 +206,8 @@ export default new Vuex.Store({
         password: paylod.password,
         email: paylod.email,
         foto: paylod.foto,
-        type: paylod.type
+        type: paylod.type,
+        points:0,
 
 
       })
@@ -164,7 +225,7 @@ export default new Vuex.Store({
         time: payload.time,
         vestuario: payload.vestuario,
         state: payload.state,
-        extra:payload.extra,
+        extra: payload.extra,
         local: payload.local
       })
     },
@@ -186,9 +247,9 @@ export default new Vuex.Store({
         menuName: payload.menuName,
         budget: payload.budget,
         state: payload.state
-   /*      date: payload.date,
-        time: payload.time,
-        vestuario: payload.vestuario */
+        /*      date: payload.date,
+             time: payload.time,
+             vestuario: payload.vestuario */
       })
     },
     ADDSERVICE: (state, payload) => {
@@ -281,6 +342,13 @@ export default new Vuex.Store({
     },
     getVestuarios: (state) => {
       return state.vestuarios;
+    },
+    getAchievements: (state) => {
+      return state.achievements;
+    },
+    
+    getRewards: (state) => {
+      return state.rewards;
     },
 
 

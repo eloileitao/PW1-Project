@@ -114,5 +114,6 @@ export default {
 <style>
 body {
   font-family: Arial;
+  background-color: white;
 }
 </style>

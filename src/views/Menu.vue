@@ -1,17 +1,41 @@
 <template>
   <div>
     <NavbarSemLog />
-    <v-container  >
-        <div fluid v-for="menu in menus" v-bind:key="menu.id"> <!-- <div> v-if="getService($route.params.serviceId).id == menu.idServiço"> --> 
-        <h1 class="center" >{{menu.name}}</h1>
-        <hr />
-        <v-img class="imgStyle"  max-height="800" max-width="350" :src="menu.imgLink" aspect-ratio="1.7"></v-img>
+    <br />
+    <!-- <v-toolbar flat dense min-width="100" color="transparent">
+      <v-row class="justify-center">
+        <v-col v-for="menu in menus" v-bind:key="menu.id" md="auto">
+          <v-row class="justify-center"  >
+            <v-btn class="text-left" text color="primary" :href="menu.id">{{menu.name}}</v-btn>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-toolbar>-->
+    <v-tabs v-model="tabs" centered background-color="transparent">
+      <v-tab v-for="menu in menus" v-bind:key="menu.namee" >{{menu.name}}</v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tabs" background-color="transparent">
+      <v-tab-item fluid v-for="menu in menus" v-bind:key="menu.name" background-color="transparent">
+        <div background-color="transparent">
+          <!-- <div> v-if="getService($route.params.serviceId).id == menu.idServiço"> -->
+          <h1 class="center">{{menu.name}}</h1>
+          
+          <v-img
+            class="imgStyle"
+            max-height="800"
+            max-width="350"
+            :src="menu.imgLink"
+            aspect-ratio="1.7"
+          ></v-img>
         </div>
-        
-    <!--  <h1 class="center">Menu Details: {{ getService($route.params.serviceId).id }}</h1> -->
-      
-    
-    </v-container>
+
+        <!--  <h1 class="center">Menu Details: {{ getService($route.params.serviceId).id }}</h1> -->
+      </v-tab-item>
+    </v-tabs-items>
+
+    <br />
+    <br />
 
     <Footer></Footer>
   </div>
@@ -19,12 +43,12 @@
 
 <style scoped>
 footer {
-    position: fixed;
-    height: 150px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin-bottom: 0px;
+  position: fixed;
+  height: 150px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
 }
 
 .center {
@@ -32,9 +56,9 @@ footer {
   text-align: center;
 }
 
-.imgStyle{
-    margin-top: 15px;
-    display: block;
+.imgStyle {
+  margin-top: 15px;
+  display: block;
   margin-left: auto;
   margin-right: auto;
 }
@@ -48,6 +72,7 @@ import NavbarSemLog from "@/components/NavBarSemLog.vue";
 import Footer from "@/components/footer.vue";
 
 export default {
+  
   name: "home",
   components: {
     NavbarSemLog,
@@ -55,21 +80,24 @@ export default {
   },
   data: function() {
     return {
-      menus: [],//this.$store.state.menus,
-      serviceId:""
+      menus: [], //this.$store.state.menus,
+      serviceId: "",
+      tabs: null,
     };
   },
- created() {
-    this.menus = this.$store.getters.getMenus.filter(menu => menu.idServico === this.$route.params.serviceId);
-  //getService($route.params.serviceId)
-  //this.serviceId=this.$route.params.serviceId,
-  console.log(this.menus)
-    }
+  created() {
+    this.menus = this.$store.getters.getMenus.filter(
+      menu => menu.idServico === this.$route.params.serviceId
+    );
+    //this.currentItem = this.menus[0].name;
+    //getService($route.params.serviceId)
+    //this.serviceId=this.$route.params.serviceId,
+    console.log(this.menus);
+  },
 
-,
- methods: {
+  methods: {
     getService(id) {
-        console.log(id)
+      console.log(id);
       return this.menus.filter(menu => menu.idServico === id);
     }
   }
