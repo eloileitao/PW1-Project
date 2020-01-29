@@ -26,7 +26,7 @@
           <h5 v-if="userRequest.state == 4" small color="error">Evento Concluído</h5>
         </td>
         <td>
-          <v-btn v-if="userRequest.state == 1" small color="error">Em Analise</v-btn>
+          <!-- <v-btn v-if="userRequest.state == 1" small color="error">Em Analise</v-btn> -->
           <v-btn
             v-if="userRequest.state == 2"
             @click="payment(userRequest.id)"

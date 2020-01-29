@@ -21,7 +21,8 @@
     <div>
       <h3 class="center">Avaliações</h3>
     </div>
-    <div v-for="review in reviews" :key="review.id" class="pa-md-12 mx-lg-auto">
+     <v-row class="justify-center">
+    <v-col v-for="review in reviews" :key="review.id" md="3" class="ma-5">
       <v-card class="mx-auto" max-width="344" outlined shaped>
         <v-list-item three-line>
           <v-list-item-content>
@@ -31,8 +32,12 @@
           </v-list-item-content>
         </v-list-item>
       </v-card>
+    
       
-    </div>
+    </v-col>
+    </v-row>
+    <br>
+    <br>
     <Footer></Footer>
   </div>
 </template>
