@@ -206,8 +206,11 @@ export default {
   },
 
   created() {
-    this.achievements = this.$store.getters.getAchievements;
+    //this.achievements = this.$store.getters.getAchievements;
     this.rewards = this.$store.getters.getRewards;
+   this.achievements =this.loggedUser.rewards.achievements;
+   console.log(this.achievements)
+   //this.rewards= this.loggedUser.arewards;
     for (let i = 0; i < this.rewards.length; i++) {
       this.rewards[i].progress = (this.points * 100) / this.rewards[i].meta;
     }

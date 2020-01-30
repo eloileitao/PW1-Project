@@ -230,13 +230,17 @@ export default {
       selectedVestuario: null,
       extras: "",
       local: "sem local",
-      enabled: false
+      enabled: false,
+      users:null,
+      loggedUser:null
     };
   },
   created() {
     this.services = this.$store.getters.getServices;
     this.allMenusStore = this.$store.getters.getMenus;
     this.vestuarios = this.$store.getters.getVestuarios;
+    this.users=this.$store.getters.getUsers;
+    this.loggedUser=this.$store.getters.getLoggedUser;
     //this.selectedMenu=this.services.filter(services=> services.selected==true)
     //this.menus=menus.filter(menu=> menu.idServico == this.selectedService.id)
   },
@@ -318,6 +322,7 @@ export default {
           icon: "error"
         });
       } else {
+
         this.$store.commit("ADD_REQUEST", {
           id: this.$store.getters.getReqLastId,
           userId: this.$store.getters.getLoggedUser.id,
@@ -343,6 +348,25 @@ export default {
           new: true
         });
 
+  if(this.loggedUser.rewards.achievements[0].available==true){
+    this.loggedUser.rewards.achievements[0].progress=100;
+    this.loggedUser.points=this.loggedUser.points+this.loggedUser.rewards.achievements[0].points
+    this.loggedUser.rewards.achievements[0].available=false;
+    console.log(this.loggedUser)
+  
+    this.$store.state.loggedUser= this.loggedUser;
+
+    for(let i=0;i<this.users;i++){
+      if(this.loggedUser.id==this.users[i].id)
+      {
+        this.users[i]=this.loggedUser;
+      }
+    }
+    this.$store.state.users=this.users;
+    console.log(this.users);
+  }
+
+   
         Swal.fire({
           title: "Pedido efetuado com sucesso!",
           icon: "success"

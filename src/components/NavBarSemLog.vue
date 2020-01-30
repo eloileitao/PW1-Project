@@ -20,7 +20,7 @@
           <v-btn text>Login</v-btn>
         </router-link>
         <v-menu offset-y v-if="getLoggedUser().type==3">
-          <template v-slot:activator="{ on }" @click="checkNewNotifications = false">
+          <template v-slot:activator="{ on }" @click="checkNewNotifications=false">
             <v-btn text v-on="on">
               <span v-if="checkNewNotifications == true">
                 <v-icon color="primary">mdi-bell</v-icon>
@@ -151,7 +151,7 @@ export default {
   },
   computed: {
     checkNewNotifications: function() {
-      return this.$store.getters.getNotifications.some(
+      return this.notifications.some(
         notification =>
           notification.new == true
       );
@@ -170,7 +170,17 @@ export default {
         notification => notification.id !== id
       );
       this.$store.state.notifications = this.notifications;
-    }
+    },
+
+    /*bellClick() {
+      for(let i=0;i< this.notifications.length;i++)
+      {
+        if(this.notifications[i].new==true){
+          this.notifications[i].new=false;
+        }
+      }
+       this.checkNewNotifications()
+    }*/
   }
 };
 </script>

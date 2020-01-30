@@ -52,21 +52,25 @@
                     <v-row>
                       <v-col cols="12">
                         <div class="text-left">
-                           <h2>Deixe o seu rating e o seu comentário. </h2>
-                             <h5>Poderá encontrar todos os rating e comentarios na página de Galeria</h5>
+                          <h2>Deixe o seu rating e o seu comentário.</h2>
+                          <h5>Poderá encontrar todos os rating e comentarios na página de Galeria</h5>
                         </div>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <div class="text-left">
-                           <h5>Pontuação:</h5>
+                          <h5>Pontuação:</h5>
                           <v-rating v-model="rating"></v-rating>
                         </div>
                       </v-col>
                       <v-col cols="12">
                         <h5>Comentario:</h5>
-                         <v-textarea solo v-model="comment" name="input-7-4" label="Escreva aqui o seu comentário"></v-textarea>
+                        <v-textarea
+                          solo
+                          v-model="comment"
+                          name="input-7-4"
+                          label="Escreva aqui o seu comentário"
+                        ></v-textarea>
                       </v-col>
-                     
                     </v-row>
                   </v-container>
                   <small>*todos os comentario e ratings que submeter não poderão ser editados futuramente.</small>
@@ -74,7 +78,11 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="dialog = false">Fechar</v-btn>
-                  <v-btn color="blue darken-1" text @click="dialog = false, reviewOrder(userRequest.id)">Submeter Avaliação</v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialog = false, reviewOrder(userRequest.id)"
+                  >Submeter Avaliação</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -134,12 +142,12 @@ th {
 }
 
 footer {
-     position: fixed;
-    height: 150px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin-bottom: 0px;
+  position: fixed;
+  height: 150px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
 }
 </style>
 
@@ -157,7 +165,10 @@ export default {
       userRequests: this.$store.state.requests,
       dialog: false,
       rating: 0,
-      comment: ""
+      comment: "",
+      users:null,
+      loggedUser:null
+
     };
   },
 
@@ -165,6 +176,8 @@ export default {
     this.userRequests = this.$store.getters.getUserRequests.filter(
       request => request.userId === this.$store.getters.getLoggedUser.id
     );
+    this.users=this.$store.getters.getUsers;
+    this.loggedUser=this.$store.getters.getLoggedUser;
   },
 
   methods: {
@@ -191,6 +204,48 @@ export default {
         })
         .then(result => {
           if (result.value) {
+            if (this.loggedUser.rewards.achievements[1].available == true) {
+              this.loggedUser.rewards.achievements[1].progress = 100;
+              this.loggedUser.points =
+                this.loggedUser.points +
+                this.loggedUser.rewards.achievements[1].points;
+              this.loggedUser.rewards.achievements[1].available = false;
+              console.log(this.loggedUser);
+
+              this.$store.state.loggedUser = this.loggedUser;
+
+              for (let i = 0; i < this.users; i++) {
+                if (this.loggedUser.id == this.users[i].id) {
+                  this.users[i] = this.loggedUser;
+                }
+              }
+              this.$store.state.users = this.users;
+              console.log(this.users);
+            }
+
+            if (this.loggedUser.rewards.achievements[3].available == true && this.loggedUser.rewards.achievements[3].progress != 100){
+              this.loggedUser.rewards.achievements[3].progress += 10;
+            }
+            
+            else if (this.loggedUser.rewards.achievements[3].available == true && this.loggedUser.rewards.achievements[3].progress == 100) {
+              
+              this.loggedUser.points =
+                this.loggedUser.points +
+                this.loggedUser.rewards.achievements[2].points;
+              this.loggedUser.rewards.achievements[2].available = false;
+              console.log(this.loggedUser);
+
+              this.$store.state.loggedUser = this.loggedUser;
+
+              for (let i = 0; i < this.users; i++) {
+                if (this.loggedUser.id == this.users[i].id) {
+                  this.users[i] = this.loggedUser;
+                }
+              }
+              this.$store.state.users = this.users;
+              console.log(this.users);
+            }
+            
             swalButtons.fire(
               "Pagamamento realizado com sucesso",
               "",
@@ -212,16 +267,57 @@ export default {
 
     reviewOrder(id) {
       this.$store.commit("ADDREVIEW", {
-          id: this.$store.getters.getReviewLastId,
-          userId: this.$store.getters.getLoggedUser.id,
-          userName: this.$store.getters.getLoggedUser.username,
-          foto: this.$store.getters.getLoggedUser.foto,
-          rating: this.rating,
-          comment: this.comment
-        });
-         this.userRequests = this.userRequests.filter(request => request.id !== id);
-         this.$store.state.requests = this.userRequests
-       
+        id: this.$store.getters.getReviewLastId,
+        userId: this.$store.getters.getLoggedUser.id,
+        userName: this.$store.getters.getLoggedUser.username,
+        foto: this.$store.getters.getLoggedUser.foto,
+        rating: this.rating,
+        comment: this.comment
+      });
+      if (this.loggedUser.rewards.achievements[2].available == true) {
+              this.loggedUser.rewards.achievements[2].progress = 100;
+              this.loggedUser.points =
+                this.loggedUser.points +
+                this.loggedUser.rewards.achievements[2].points;
+              this.loggedUser.rewards.achievements[2].available = false;
+              console.log(this.loggedUser);
+
+              this.$store.state.loggedUser = this.loggedUser;
+
+              for (let i = 0; i < this.users; i++) {
+                if (this.loggedUser.id == this.users[i].id) {
+                  this.users[i] = this.loggedUser;
+                }
+              }
+              this.$store.state.users = this.users;
+              console.log(this.users);
+            }
+            if (this.loggedUser.rewards.achievements[4].available == true && this.loggedUser.rewards.achievements[4].progress != 100){
+              this.loggedUser.rewards.achievements[4].progress += 10;
+            }
+            
+            else if (this.loggedUser.rewards.achievements[4].available == true && this.loggedUser.rewards.achievements[4].progress == 100) {
+              
+              this.loggedUser.points =
+                this.loggedUser.points +
+                this.loggedUser.rewards.achievements[2].points;
+              this.loggedUser.rewards.achievements[2].available = false;
+              console.log(this.loggedUser);
+
+              this.$store.state.loggedUser = this.loggedUser;
+
+              for (let i = 0; i < this.users; i++) {
+                if (this.loggedUser.id == this.users[i].id) {
+                  this.users[i] = this.loggedUser;
+                }
+              }
+              this.$store.state.users = this.users;
+              console.log(this.users);
+            }
+      this.userRequests = this.userRequests.filter(
+        request => request.id !== id
+      );
+      this.$store.state.requests = this.userRequests;
     }
   }
 };

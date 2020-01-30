@@ -249,6 +249,53 @@ export default new Vuex.Store({
         foto: paylod.foto,
         type: paylod.type,
         points:0,
+        rewards:{
+        requestServiceForFree:false,
+        get20EurosCupon:false,
+        achievements: [
+      {
+        id: 0,
+        tittle: "Primeiro Pedido",
+        desc: "Faça o seu primeiro pedido para receber 5 pontos!",
+        points: 5,
+        available: true,
+        progress: 0,
+      },
+      {
+        id: 1,
+        tittle: "Primeiro Pagamento",
+        desc: "Faça o seu primeiro pagamento para receber 5 pontos!",
+        points: 5,
+        available: true,
+        progress: 0,
+      },
+      {
+        id: 2,
+        tittle: "Primeira review",
+        desc: "Faça o seu primeiro pedido para receber 5 pontos!",
+        points: 5,
+        available: true,
+        progress: 0,
+      },
+      {
+        id: 3,
+        tittle: "Fazer 10 pagamentos",
+        desc: "Faça 10 pagamentos para receber 50 pontos!",
+        points: 50,
+        available: true,
+        progress: 0,
+      },
+      {
+        id: 4,
+        tittle: "Fazer 10 reviews",
+        desc: "Faça o seu primeiro pedido para receber 35‬ pontos!",
+        points: 35,
+        available: true,
+        progress: 0,
+      }
+    ]
+
+        },
 
 
       })
@@ -403,6 +450,9 @@ export default new Vuex.Store({
 
     getNotifications: (state) => {
       return state.notifications;
+    },
+    getUsers:(state) => {
+      return state.users;
     },
 
 
