@@ -15,64 +15,64 @@
 
 export default {
   beforeDestroy() {
-    // //update Local Storage Users
-    // localStorage.setItem("users", JSON.stringify(this.$store.state.users));
-    // //update Local Storage Menus
-    // localStorage.setItem("menus", JSON.stringify(this.$store.state.menus));
-    // //update Local Storage Serviços
-    // localStorage.setItem(
-    //   "services",
-    //   JSON.stringify(this.$store.state.services)
-    // );
-    // //update Local Storage Requests
-    // localStorage.setItem(
-    //   "requests",
-    //   JSON.stringify(this.$store.state.requests)
-    // );
-    // //update Local Storage Reviews
-    // localStorage.setItem("reviews", JSON.stringify(this.$store.state.reviews));
-    // //update Local Storage Notifications
-    // localStorage.setItem(
-    //   "notifications",
-    //   JSON.stringify(this.$store.state.notifications)
-    // );
-    // localStorage.setItem(
-    //   "loggedUser",
-    //   JSON.stringify(this.$store.state.loggedUser)
-    // );
+    //update Local Storage Users
+    localStorage.setItem("users", JSON.stringify(this.$store.state.users));
+    //update Local Storage Menus
+    localStorage.setItem("menus", JSON.stringify(this.$store.state.menus));
+    //update Local Storage Serviços
+    localStorage.setItem(
+      "services",
+      JSON.stringify(this.$store.state.services)
+    );
+    //update Local Storage Requests
+    localStorage.setItem(
+      "requests",
+      JSON.stringify(this.$store.state.requests)
+    );
+    //update Local Storage Reviews
+    localStorage.setItem("reviews", JSON.stringify(this.$store.state.reviews));
+    //update Local Storage Notifications
+    localStorage.setItem(
+      "notifications",
+      JSON.stringify(this.$store.state.notifications)
+    );
+    localStorage.setItem(
+      "loggedUser",
+      JSON.stringify(this.$store.state.loggedUser)
+    );
   },
   created() {
     window.addEventListener(
       "beforeunload",
       () => {
-        // //update Local Storage Users
-        // localStorage.setItem("users", JSON.stringify(this.$store.state.users));
-        // //update Local Storage Menus
-        // localStorage.setItem("menus", JSON.stringify(this.$store.state.menus));
-        // //update Local Storage Serviços
-        // localStorage.setItem(
-        //   "services",
-        //   JSON.stringify(this.$store.state.services)
-        // );
-        // //update Local Storage Requests
-        // localStorage.setItem(
-        //   "requests",
-        //   JSON.stringify(this.$store.state.requests)
-        // );
-        // //update Local Storage Reviews
-        // localStorage.setItem(
-        //   "reviews",
-        //   JSON.stringify(this.$store.state.reviews)
-        // );
-        // //update Local Storage Notifications
-        // localStorage.setItem(
-        //   "notifications",
-        //   JSON.stringify(this.$store.state.notifications)
-        // );
-        // localStorage.setItem(
-        //   "loggedUser",
-        //   JSON.stringify(this.$store.state.loggedUser)
-        // );
+         //update Local Storage Users
+        localStorage.setItem("users", JSON.stringify(this.$store.state.users));
+        //update Local Storage Menus
+        localStorage.setItem("menus", JSON.stringify(this.$store.state.menus));
+        //update Local Storage Serviços
+        localStorage.setItem(
+          "services",
+          JSON.stringify(this.$store.state.services)
+        );
+        //update Local Storage Requests
+        localStorage.setItem(
+          "requests",
+          JSON.stringify(this.$store.state.requests)
+        );
+        //update Local Storage Reviews
+        localStorage.setItem(
+          "reviews",
+          JSON.stringify(this.$store.state.reviews)
+        );
+        //update Local Storage Notifications
+        localStorage.setItem(
+          "notifications",
+          JSON.stringify(this.$store.state.notifications)
+        );
+        localStorage.setItem(
+          "loggedUser",
+          JSON.stringify(this.$store.state.loggedUser)
+        );
       },
       false
     );

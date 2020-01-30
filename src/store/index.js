@@ -29,7 +29,7 @@ export default new Vuex.Store({
       name: "Menu Deluxe",
       food: ["Pão", "Bolachas", "Bolo de Chocolate", "Compota", "Mel"],
       drink: ["Café", "Leite", "Sumo de Laranja", "Sumo de Maça"],
-      imgLink: "https://lh3.googleusercontent.com/proxy/mHMTEkeqX3xidmJaHRouV706-B4C9l_NIhvAsR3SJ62z9d02O7fFnLy-qVerOHmNWAdBIZXYo8g7nkn41JjF2i5Agr6pS7a3LJO5PCOKreKGtcIPpHgb__QemB8tOvrZgSpiYQ",
+      imgLink: "https://www.nacadeiradapapa.com/wp-content/uploads/2019/02/paosemgluten04-1200x675.jpg",
       selected: false
     },
     {
