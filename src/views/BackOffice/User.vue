@@ -129,7 +129,6 @@ export default {
     };
   },
   methods: {
-    
     removeUser(id) {
       const swalButtons = Swal.mixin({
         customClass: {
@@ -154,7 +153,8 @@ export default {
         .then(result => {
           if (result.value) {
             swalButtons.fire("Utilizador removido com sucesso", "", "success");
-            this.users = this.users.filter(user => user.id !== id);
+            this.filteredUsers = this.users.filter(user => user.id !== id);
+             this.$store.state.users = this.filteredUsers
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel

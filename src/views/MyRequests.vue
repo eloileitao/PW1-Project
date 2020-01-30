@@ -22,7 +22,7 @@
         <td>
           <h5 v-if="userRequest.state == 1" small color="error">Em Analise</h5>
           <h5 v-if="userRequest.state == 2" small color="error">Pagamento em Falta</h5>
-          <h5 v-if="userRequest.state == 3" small color="error">Pagamento Conluído</h5>
+          <h5 v-if="userRequest.state == 3" small color="error">Pagamento Concluído</h5>
           <h5 v-if="userRequest.state == 4" small color="error">Evento Concluído</h5>
         </td>
         <td>
@@ -215,10 +215,12 @@ export default {
           id: this.$store.getters.getReviewLastId,
           userId: this.$store.getters.getLoggedUser.id,
           userName: this.$store.getters.getLoggedUser.username,
+          foto: this.$store.getters.getLoggedUser.foto,
           rating: this.rating,
           comment: this.comment
         });
          this.userRequests = this.userRequests.filter(request => request.id !== id);
+         this.$store.state.requests = this.userRequests
        
     }
   }

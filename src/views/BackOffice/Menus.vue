@@ -25,7 +25,12 @@
                   <v-text-field label="Link da Imagem*" v-model="imgLink" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="Descrição*" v-model="desc" required></v-text-field>
+                  Entre cada item que insira utilize uma virgula para os separar.
+                  <v-text-field label="Comida*" v-model="food" required></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  Entre cada item que insira utilize uma virgula para os separar.
+                  <v-text-field label="Bebida*" v-model="drink" required></v-text-field>
                 </v-col>
 
                 <v-col cols="12" sm="6">
@@ -56,7 +61,8 @@
         <th>ID do Menu</th>
         <th>Nome</th>
         <th>Link da Imagem</th>
-        <th>Descrição</th>
+        <th>Comidas</th>
+        <th>Bebidas</th>
         <th>Serviço Referente</th>
         <th>Actions</th>
       </tr>
@@ -64,7 +70,8 @@
         <td>{{ menu.id }}</td>
         <td>{{ menu.name }}</td>
         <td>{{ menu.imgLink }}</td>
-        <td>{{ menu.desc }}</td>
+        <td>{{ menu.food }}</td>
+        <td>{{ menu.drink }}</td>
         <td>{{ menu.idServico }}</td>
         <td>
           <v-btn small @click="removeService(menu.id)" color="error">Remover</v-btn>
@@ -148,7 +155,8 @@ export default {
       idServico: 0,
       name: "",
       imgLink: "",
-      desc: "",
+      food: [],
+      drink: [],
       menus: this.$store.state.menus
     };
   },
@@ -159,7 +167,8 @@ export default {
         idServico: this.idServico,
         name: this.name,
         imgLink: this.imgLink,
-        desc: this.desc
+        food: this.food.split(','),
+        drink: this.drink.split(','),
       });
     },
 
@@ -199,6 +208,7 @@ export default {
                 this.menus.splice(i, 1);
               }
             }
+            this.$store.state.menus = this.menus
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel

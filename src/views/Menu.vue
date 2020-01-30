@@ -12,22 +12,50 @@
       </v-row>
     </v-toolbar>-->
     <v-tabs v-model="tabs" centered background-color="transparent">
-      <v-tab v-for="menu in menus" v-bind:key="menu.namee" >{{menu.name}}</v-tab>
+      <v-tab v-for="menu in menus" v-bind:key="menu.namee">{{menu.name}}</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tabs" background-color="transparent">
       <v-tab-item fluid v-for="menu in menus" v-bind:key="menu.name" background-color="transparent">
+        <v-container fill-height>
+          <v-layout align-center>
+            <v-flex>
+              <h3 class="display-3">{{menu.name}}</h3>
+             <v-divider class="my-3"></v-divider>
+              <v-row>
+                <v-col cols="3">
+                   <br>
+                   <v-icon>mdi-silverware-variant</v-icon>
+                  Comida:
+                  <ul v-for="items in menu.food" :key="items">
+                    <li>{{items}}</li>     
+                  </ul>
+                </v-col>
+                <v-col cols="3">
+                   <br>
+                   <v-icon>mdi-glass-tulip</v-icon>
+                  Bebida:
+                   <ul v-for="items in menu.drink" :key="items">
+                    <li>{{items}}</li>     
+                  </ul>
+                </v-col>
+                <v-col cols="6">
+                  <v-img
+                    class="imgStyle"
+                    max-height="800"
+                    max-width="350"
+                    :src="menu.imgLink"
+                    aspect-ratio="1.7"
+                  ></v-img>
+                </v-col>
+              </v-row>
+            </v-flex>
+          </v-layout>
+        </v-container>
+
         <div background-color="transparent">
           <!-- <div> v-if="getService($route.params.serviceId).id == menu.idServiço"> -->
-          <h1 class="center">{{menu.name}}</h1>
-          
-          <v-img
-            class="imgStyle"
-            max-height="800"
-            max-width="350"
-            :src="menu.imgLink"
-            aspect-ratio="1.7"
-          ></v-img>
+          <h1 class="center"></h1>
         </div>
 
         <!--  <h1 class="center">Menu Details: {{ getService($route.params.serviceId).id }}</h1> -->
@@ -72,7 +100,6 @@ import NavbarSemLog from "@/components/NavBarSemLog.vue";
 import Footer from "@/components/footer.vue";
 
 export default {
-  
   name: "home",
   components: {
     NavbarSemLog,
@@ -82,7 +109,7 @@ export default {
     return {
       menus: [], //this.$store.state.menus,
       serviceId: "",
-      tabs: null,
+      tabs: null
     };
   },
   created() {

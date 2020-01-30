@@ -8,33 +8,73 @@ export default new Vuex.Store({
     menus: [{
       id: 0,
       idServico: 0,
-      name: "Menu A",
-      desc: "",
-      imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+      name: "Menu Simples",
+      food: ["Pão", "Bolachas"],
+      drink: ["Café", "Leite"],
+      imgLink: "https://hatandapron.files.wordpress.com/2013/09/dsc_1436.jpg",
       selected: false
     },
     {
       id: 1,
       idServico: 0,
-      name: "Menu B",
-      desc: "",
-      imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+      name: "Menu Premium",
+      food: ["Pão", "Bolachas", "Bolo de Chocolate"],
+      drink: ["Café", "Leite", "Sumo de Laranja"],
+      imgLink: "https://thumbs.dreamstime.com/b/bolo-de-chocolate-da-cereja-e-ajuste-do-suco-de-laranja-na-tabela-de-madeira-56219471.jpg",
       selected: false
     },
     {
       id: 2,
-      idServico: 1,
-      name: "Menu C",
-      desc: "",
-      imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+      idServico: 0,
+      name: "Menu Deluxe",
+      food: ["Pão", "Bolachas", "Bolo de Chocolate", "Compota", "Mel"],
+      drink: ["Café", "Leite", "Sumo de Laranja", "Sumo de Maça"],
+      imgLink: "https://lh3.googleusercontent.com/proxy/mHMTEkeqX3xidmJaHRouV706-B4C9l_NIhvAsR3SJ62z9d02O7fFnLy-qVerOHmNWAdBIZXYo8g7nkn41JjF2i5Agr6pS7a3LJO5PCOKreKGtcIPpHgb__QemB8tOvrZgSpiYQ",
       selected: false
     },
     {
       id: 3,
       idServico: 2,
-      name: "Menu A",
-      desc: "",
-      imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+      name: "Menu Simples",
+      food: ["Pão", "Bolachas"],
+      drink: ["Café", "Água"],
+      imgLink: "https://hatandapron.files.wordpress.com/2013/09/dsc_1436.jpg",
+      selected: false
+    },
+    {
+      id: 4,
+      idServico: 2,
+      name: "Menu Premium",
+      food: ["Pão", "Bolachas", "Bolo de Chocolate"],
+      drink: ["Café", "Água", "Sumo de Laranja"],
+      imgLink: "https://thumbs.dreamstime.com/b/bolo-de-chocolate-da-cereja-e-ajuste-do-suco-de-laranja-na-tabela-de-madeira-56219471.jpg",
+      selected: false
+    },
+    {
+      id: 5,
+      idServico: 3,
+      name: "Menu Simples",
+      food: ["Bife de Perú grelhado", "Francesinha"],
+      drink: ["Água", "Refrigerante"],
+      imgLink: "https://i.pinimg.com/originals/a0/e2/5d/a0e25ddcfae768e2e7b8fcaf5f3cbd47.jpg",
+      selected: false
+    },
+    {
+      id: 6,
+      idServico: 3,
+      name: "Menu Premium",
+      food: ["Coelho Assado", "Salmão no Forno"],
+      drink: ["Água", "Refrigerante", "Vinho"],
+      imgLink: "https://www.pingodoce.pt/wp-content/uploads/2016/10/salmaonoforno-516x310.jpg",
+      selected: false
+    },
+    {
+      id: 7,
+      idServico: 3,
+      name: "Menu Deluxe",
+      food: ["Cozido à Portuguesa", "Bacalhau à Lagareiro"],
+      drink: ["Água", "Refrigerante", "Vinho", "Espumante"],
+      imgLink: "https://www.teleculinaria.pt/wp-content/uploads/2018/05/bacalhau-a-lagareiro.jpg",
       selected: false
     },],
     vestuarios: [
@@ -63,7 +103,7 @@ export default new Vuex.Store({
         email: "joao@gmail.com",
         username: "joao",
         password: "123",
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTEFF6tCXWJuWRLxP0Ovu785xFo3oiw_kKf0ZRJCIGH0jbIFvo1",
+        foto: "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
         type: 3
       }
 
@@ -163,21 +203,21 @@ export default new Vuex.Store({
       {
         id: 0,
         name: "Pequeno Almoço",
-        imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+        imgLink: "https://media-manager.noticiasaominuto.com/1920/1558605477/naom_5ce66e68b5899.jpg?crop_params=eyJsYW5kc2NhcGUiOnsiY3JvcFdpZHRoIjoyNTYwLCJjcm9wSGVpZ2h0IjoxNDM5LCJjcm9wWCI6MCwiY3JvcFkiOjg3fSwicG9ydHJhaXQiOnsiY3JvcFdpZHRoIjo5NzMsImNyb3BIZWlnaHQiOjE3MzAsImNyb3BYIjoxMTYwLCJjcm9wWSI6MH19",
         selected: false,
 
       },
       {
         id: 2,
         name: "Coffe Break",
-        imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+        imgLink: "https://cdn.dicionariopopular.com/imagens/coffee-break-og.jpg",
         selected: false,
 
       },
       {
         id: 3,
         name: "Buffet",
-        imgLink: "https://cdn.vuetifyjs.com/images/cards/kitchen.png",
+        imgLink: "https://fokke.com.br/wp-content/uploads/2013/09/buffet.jpg",
         selected: false,
 
       }
@@ -192,6 +232,7 @@ export default new Vuex.Store({
         id: 0,
         userId: 1,
         userName: "joao",
+        foto: "https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png",
         rating: 4,
         comment: "Gostei do serviço"
       }
@@ -225,7 +266,7 @@ export default new Vuex.Store({
         time: payload.time,
         vestuario: payload.vestuario,
         state: payload.state,
-        extra: payload.extra,
+        extras: payload.extras,
         local: payload.local
       })
     },
@@ -266,7 +307,8 @@ export default new Vuex.Store({
         idServico: payload.idServico,
         name: payload.name,
         imgLink: payload.imgLink,
-        desc: payload.desc,
+        food: payload.food,
+        drink: payload.drink,
         selected: false,
       })
     },

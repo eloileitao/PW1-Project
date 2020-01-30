@@ -9,16 +9,24 @@
           <v-card-text>
             <v-row>
               <v-flex>
-                <v-img
+                <v-img 
+                  v-if="this.loggedUser.foto != ''"
                   max-height="125"
                   max-width="125"
                   class="centerImg"
                   :src="this.loggedUser.foto"
                 ></v-img>
+                <v-img 
+                  v-if="this.loggedUser.foto == ''"
+                  max-height="125"
+                  max-width="125"
+                  class="centerImg"
+                  src="https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png"
+                ></v-img>
               </v-flex>
             </v-row>
             <br />
-            <h2 class="center">Bem vindo {{this.loggedUser.username}}</h2>
+            <h2 class="center">Bem-vindo {{this.loggedUser.username}}</h2>
             <br />
             <br />
             <v-row>
@@ -28,6 +36,13 @@
                   v-model="editUsername"
                   prepend-icon="person"
                   :label="this.loggedUser.username"
+                  required
+                ></v-text-field>
+                <h5>Insira o link da sua Foto:</h5>
+                <v-text-field
+                  v-model="editFoto"
+                  prepend-icon="person"
+                  :label="this.loggedUser.foto"
                   required
                 ></v-text-field>
                 <h5>Email:</h5>
@@ -48,16 +63,16 @@
               </v-col>
 
               <v-col cols="6">
-                <h1>Necessita ajuda?</h1>
+                <h1>Necessita de ajuda?</h1>
                 <br />
                 <h3>Deseja alterar a sua informação?</h3>
                 <br />
                 <p>
-                  A sua informação atual encontra-se exposta no interior de cada caixa de texto, para puder alterar so
-                  necessita de primir a caixa de texto e escrever a sua nova indormação. De seguida prima o botão "Alterar Informação" e
+                  A sua informação atual encontra-se exposta no interior de cada caixa de texto, para puder alterar
+                  necessita de primir a caixa de texto e escrever a sua nova informação. De seguida, prima o botão "Alterar Informação" e
                   ja está!
                 </p>
-                <h5>Nota: Os campo que nao preencher irão permanecer com a informação que possuia anteriormente.</h5>
+                <h5>Nota: Os campos que não preencher irão permanecer com a informação que possuia anteriormente.</h5>
               </v-col>
             </v-row>
           </v-card-text>
@@ -71,14 +86,13 @@
     </v-container>
     <br />
     <br />
-   <v-row class="justify-center"> 
+    <v-row class="justify-center">
       <h1>Conquistas</h1>
-     </v-row> 
+    </v-row>
     <br />
     <br />
     <!-- Achievements -->
     <v-row class="justify-center">
-      
       <v-col v-for="achievement in achievements" v-bind:key="achievement.id">
         <v-card class="mx-auto" max-width="344" height="150" outlined shaped>
           <v-list-item three-line>
@@ -103,16 +117,16 @@
         </v-card>
       </v-col>
     </v-row>
-    <br>
-    <br>
-     <v-row class="justify-center"> 
-<h1>Recompensas</h1>
-<br>
-<br>
- </v-row>
-     <!-- Recompensas -->
-     <v-row class="justify-center">
-      <v-col v-for="reward in rewards" v-bind:key="reward.id" cols=12>
+    <br />
+    <br />
+    <v-row class="justify-center">
+      <h1>Recompensas</h1>
+      <br />
+      <br />
+    </v-row>
+    <!-- Recompensas -->
+    <v-row class="justify-center">
+      <v-col v-for="reward in rewards" v-bind:key="reward.id" cols="12">
         <v-card class="mx-auto" width="600" height="150" outlined shaped>
           <v-list-item three-line>
             <v-list-item-content>
@@ -170,13 +184,14 @@ export default {
   data: function() {
     return {
       loggedUser: this.$store.state.loggedUser,
-      points:this.$store.state.loggedUser.points,
+      points: this.$store.state.loggedUser.points,
       users: this.$store.state.users,
       editUsername: "",
+      editFoto: "",
       editEmail: "",
       editPassword: "",
       achievements: null,
-      rewards:null,
+      rewards: null,
       value: 0,
       bufferValue: 100
     };
@@ -192,9 +207,9 @@ export default {
 
   created() {
     this.achievements = this.$store.getters.getAchievements;
-    this.rewards=this.$store.getters.getRewards;
-    for(let i=0;i<this.rewards.length;i++){
-      this.rewards[i].progress=this.points*100/this.rewards[i].meta
+    this.rewards = this.$store.getters.getRewards;
+    for (let i = 0; i < this.rewards.length; i++) {
+      this.rewards[i].progress = (this.points * 100) / this.rewards[i].meta;
     }
   },
 
@@ -210,6 +225,11 @@ export default {
             this.editUsername = this.loggedUser.username;
           } else {
             this.users[i].username = this.editUsername;
+          }
+          if (this.editFoto == "") {
+            this.editFoto = this.loggedUser.foto;
+          } else {
+            this.users[i].foto = this.editFoto;
           }
           if (this.editEmail == "") {
             this.editEmail = this.loggedUser.email;

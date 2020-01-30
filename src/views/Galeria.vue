@@ -21,30 +21,33 @@
     <div>
       <h3 class="center">Avaliações</h3>
     </div>
-     <v-row class="justify-center">
-    <v-col v-for="review in reviews" :key="review.id" md="3" class="ma-5">
-      <v-card class="mx-auto" max-width="344" outlined shaped>
-        <v-list-item three-line>
-          <v-list-item-content>
-            <div class="overline mb-4">{{review.userName}}</div>
-            <v-list-item-title class="headline mb-1"><v-rating :value="review.rating" background-color="grey" color="grey" readonly></v-rating></v-list-item-title>
-            <v-list-item-subtitle>{{review.comment}}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-card>
-    
-      
-    </v-col>
+    <v-row class="justify-center">
+      <v-col v-for="review in reviews" :key="review.id" md="3" class="ma-5">
+        <v-card class="mx-auto" max-width="344" outlined shaped>
+          <v-list-item three-line>
+            <v-list-item-content>
+              
+              <div class="overline mb-4">
+                <v-avatar>
+                <img :src="review.foto" max-height=15 max-width=15 />
+              </v-avatar> {{review.userName}}</div>
+              <v-list-item-title class="headline mb-1">
+                <v-rating :value="review.rating" background-color="grey" color="grey" readonly></v-rating>
+              </v-list-item-title>
+              <v-list-item-subtitle>{{review.comment}}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </v-col>
     </v-row>
-    <br>
-    <br>
+    <br />
+    <br />
     <Footer></Footer>
   </div>
 </template>
 
 
 <style scoped>
-
 .center {
   margin-top: 25px;
   text-align: center;
@@ -54,7 +57,6 @@
 <script>
 import NavbarSemLog from "@/components/NavBarSemLog.vue";
 import Footer from "@/components/footer.vue";
-import Swal from "sweetalert2";
 export default {
   components: {
     NavbarSemLog,
@@ -73,60 +75,7 @@ export default {
   },
 
   methods: {
-    payment(id) {
-      const swalButtons = Swal.mixin({
-        customClass: {
-          confirmButton: "confirm-button-class",
-          cancelButton: "cancel-button-class"
-        },
-        buttonsStyling: true
-      });
-
-      swalButtons
-        .fire({
-          title: "Deseja mesmo proceder com o pagamento?",
-          text: "Verifique se concorda com o montante mostrado",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Sim",
-          confirmButtonColor: "#009933",
-          cancelButtonText: "Não",
-          cancelButtonColor: "#990000",
-          reverseButtons: true
-        })
-        .then(result => {
-          if (result.value) {
-            swalButtons.fire(
-              "Pagamamento realizado com sucesso",
-              "",
-              "success"
-            );
-            for (let i = 0; i < this.userRequests.length; i++) {
-              if (this.userRequests[i].id === id) {
-                this.userRequests[i].state = 3;
-              }
-            }
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalButtons.fire("Cancelado", "A sua ação foi cancelada", "error");
-          }
-        });
-    },
-
-    reviewOrder(id) {
-      this.$store.commit("ADDREVIEW", {
-        id: this.$store.getters.getReviewLastId,
-        userId: this.$store.getters.getLoggedUser.id,
-        userName: this.$store.getters.getLoggedUser.username,
-        rating: this.rating,
-        comment: this.comment
-      });
-      this.userRequests = this.userRequests.filter(
-        request => request.id !== id
-      );
-    }
+    
   }
 };
 </script>

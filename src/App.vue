@@ -38,7 +38,7 @@ export default {
     );
   },
   created() {
-    window.addEventListener(
+      window.addEventListener(
       "beforeunload",
       () => {
         //update Local Storage Users
@@ -67,8 +67,8 @@ export default {
         );
       },
       false
-    );
-    
+    );  
+
     //efetuar se as varias veis estao no local storage para as atualizar na store
     if (localStorage.getItem("users") != null) {
       //

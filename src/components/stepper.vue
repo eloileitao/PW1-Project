@@ -43,7 +43,7 @@
           <h4 class="center">Que tipo de serviço deseja?</h4>
           <h5
             class="center"
-          >Pode saber mais sobre os nosso serviços e menus a nossa página de serviços</h5>
+          >Pode saber mais sobre os nossos serviços e menus na nossa página de serviços</h5>
           <!-- <v-card class="mb-12" flat> -->
           <v-row class="justify-center">
             <v-col v-for="service in services" v-bind:key="service.id" md="3" class="ma-5">
@@ -99,7 +99,7 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <h4 class="center">Escolha a o dia e a hora do seu evento!</h4>
+          <h4 class="center">Escolha o dia e a hora do seu evento!</h4>
           <!-- <v-card class="mb-12" flat> -->
           <v-row class="justify-center">
             <v-col md="3" class="ma-5">
