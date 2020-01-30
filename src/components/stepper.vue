@@ -13,7 +13,7 @@
         <v-divider></v-divider>
 
         <v-stepper-step :complete="e1 > 2" step="2" @click="e1 = 2">
-          <v-btn text>Menu/Evento</v-btn>
+          <v-btn text>Menu</v-btn>
         </v-stepper-step>
 
         <v-divider></v-divider>
