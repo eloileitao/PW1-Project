@@ -128,7 +128,7 @@ export default new Vuex.Store({
       {
         id: 2,
         tittle: "Primeira review",
-        desc: "Faça o seu primeiro pedido para receber 5 pontos!",
+        desc: "Faça sua primeira avaliação para receber 5 pontos!",
         points: 5,
         available: true,
         progress: 0,
@@ -136,7 +136,7 @@ export default new Vuex.Store({
       {
         id: 3,
         tittle: "Fazer 10 pagamentos",
-        desc: "Faça 10 pagamentos para receber 50 pontos!",
+        desc: "Faça 10 avaliações para receber 50 pontos!",
         points: 50,
         available: true,
         progress: 0,
@@ -154,7 +154,7 @@ export default new Vuex.Store({
       {
         id:0,
         tittle:"Fazer um pedido de graça",
-        desc:"Junte 100‬ pontos para receber um pedido gratuito",
+        desc:"Junte 200‬ pontos para receber um pedido gratuito",
         progress:0,
         meta:200,
         complete:false,
