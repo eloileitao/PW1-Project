@@ -4,8 +4,6 @@
     <div>
       <h1 class="center">Serviços</h1>
      <br>
-      <!-- <v-container class="my-5"> -->
-        <!-- <v-card class="mb-12" flat> -->
           <v-row justify="space-between">
             <v-col v-for="service in services" v-bind:key="service.id" md="3" class="ma-5">
               <v-hover v-slot:default="{ hover }">
@@ -28,8 +26,6 @@
               </v-hover>
             </v-col>
           </v-row>
-        <!-- </v-card> -->
-      <!-- </v-container> -->
     </div>
 
     <Footer></Footer>
@@ -53,9 +49,6 @@ footer {
 </style>
 
 <script>
-// @ is an alias to /src
-//import HelloWorld from "@/components/HelloWorld.vue";
-//commite test
 import NavbarSemLog from "@/components/NavBarSemLog.vue";
 import Footer from "@/components/footer.vue";
 
@@ -68,8 +61,6 @@ export default {
   data: function() {
     return {
       services: [],
-    
-     // budget: []
     };
   },
    created() {

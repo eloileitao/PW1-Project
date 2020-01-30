@@ -8,7 +8,7 @@
           </a>
         </div>
         <div class="col-4">
-          <p>Escola Superior de Media Artes e Design n/ ola</p>
+          <p>Escola Superior de Media Artes e Design</p>
           <p>Rua D. Sancho I, n.º 981</p>
           <p>4480-876 Vila do Conde</p>
           <p>Portugal</p>

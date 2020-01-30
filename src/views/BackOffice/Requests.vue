@@ -79,14 +79,6 @@ template {
   margin-left: 20px;
 }
 
-footer {
-    position: fixed;
-    height: 150px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin-bottom: 0px;
-}
 </style>
 
 
@@ -108,12 +100,6 @@ export default {
   },
   methods: {
     updateNotification(id) {
-     /*  for (let i = 0; i < this.notifications.length; i++) {
-        if (this.notifications[i].userId == id) {
-          this.notifications[i].state = 2;
-          console.log(this.notifications[i].state);
-        }
-      } */
       for (let i = 0; i < this.requests.length; i++) {
         if(this.requests[i].id == id){
          this.$store.commit("UPDATENOTIFICATION", {

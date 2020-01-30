@@ -3,7 +3,7 @@
     <v-toolbar color="orange darken-1" dark>
       <v-toolbar-title>
         <router-link :to="{name: 'home'}" tag="button">
-          <v-btn text>Logo</v-btn>
+          <v-img src="../assets/logo.png" class="img" contain max-height= "90"></v-img>
         </router-link>
       </v-toolbar-title>
 
@@ -119,6 +119,11 @@
   </div>
 </template>
 
+<style scoped>
+.img {
+  margin-top: 120px;
+}
+</style>
 
 <script>
 export default {

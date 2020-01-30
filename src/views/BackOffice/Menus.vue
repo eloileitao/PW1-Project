@@ -78,6 +78,7 @@
         </td>
       </tr>
     </table>
+    <br> <br>
     <Footer></Footer>
   </v-content>
 </template>
@@ -128,14 +129,7 @@ th {
   justify-content: center;
 }
 
-footer {
-    position: fixed;
-    height: 150px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin-bottom: 0px;
-}
+
 </style>
 
 <script>
@@ -171,13 +165,6 @@ export default {
         drink: this.drink.split(','),
       });
     },
-
-    /*   getServices(){
-        for (let i = 0; i < this.services.length; i++) {
-            let serviceName = this.services[i].name;
-            return serviceName   
-        }
-    },  */
 
     removeService(id) {
       const swalButtons = Swal.mixin({
