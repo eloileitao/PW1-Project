@@ -108,12 +108,26 @@ export default {
   },
   methods: {
     updateNotification(id) {
-      for (let i = 0; i < this.notifications.length; i++) {
+     /*  for (let i = 0; i < this.notifications.length; i++) {
         if (this.notifications[i].userId == id) {
           this.notifications[i].state = 2;
           console.log(this.notifications[i].state);
         }
+      } */
+      for (let i = 0; i < this.requests.length; i++) {
+        if(this.requests[i].id == id){
+         this.$store.commit("UPDATENOTIFICATION", {
+          id: this.$store.getters.getNotificationLastId,
+          userId: this.$store.getters.getLoggedUser.id,
+          userName: this.$store.getters.getLoggedUser.username,
+          state: 2,
+          serviceName: this.requests[i].serviceName,
+          menuName: this.requests[i].menuName,
+          new: true
+        });
+        }
       }
+      
     },
 
     endEvent(id){

@@ -276,7 +276,8 @@ export default new Vuex.Store({
         userName: payload.userName,
         serviceName: payload.serviceName,
         menuName: payload.menuName,
-        state: payload.state
+        state: payload.state,
+        new: payload.new
       })
     },
     ADDREQUESTTOUSER: (state, payload) => {
@@ -370,6 +371,13 @@ export default new Vuex.Store({
       }
       return lastId
     },
+    getNotificationLastId: (state) => {
+      let lastId = 0
+      if (state.notifications.length > 0) {
+        lastId = state.notifications[state.notifications.length - 1].id + 1
+      }
+      return lastId
+    },
     getLoggedUser: (state) => {
       return state.loggedUser;
     },
@@ -391,6 +399,10 @@ export default new Vuex.Store({
     
     getRewards: (state) => {
       return state.rewards;
+    },
+
+    getNotifications: (state) => {
+      return state.notifications;
     },
 
 

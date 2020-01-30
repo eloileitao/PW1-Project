@@ -1,122 +1,162 @@
 <template>
- 
-    <div>
-      <v-toolbar color="orange darken-1" dark >
-        <v-toolbar-title>  <router-link :to="{name: 'home'}" tag="button">
-            <v-btn text > Logo</v-btn>
-          </router-link>
-         
-        </v-toolbar-title>
+  <div>
+    <v-toolbar color="orange darken-1" dark>
+      <v-toolbar-title>
+        <router-link :to="{name: 'home'}" tag="button">
+          <v-btn text>Logo</v-btn>
+        </router-link>
+      </v-toolbar-title>
 
-        <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-        <v-toolbar-items>
-          <router-link :to="{name:'services'}" tag="button"> <v-btn text>Serviços</v-btn></router-link>
-           <router-link :to="{name:'galery'}" tag="button"><v-btn text>Galeria</v-btn></router-link>
-          <v-btn text>Sobre</v-btn>
-            <router-link :to="{name:'login'}" tag="button" v-if="getLoggedUser().id==-1"><v-btn text>Login</v-btn></router-link>
-          <!-- <buttonModalLogin v-if="getLoggedUser().id==-1"></buttonModalLogin> -->
-          <!--<buttonModalRegister v-if="getLoggedUser().id==-1"></buttonModalRegister>-->
-
-            <v-menu offset-y v-if="getLoggedUser().type==3">
-            <template v-slot:activator="{ on }">
-              <v-btn text v-on="on" @click="checkNotification()">
+      <v-toolbar-items>
+        <router-link :to="{name:'services'}" tag="button">
+          <v-btn text>Serviços</v-btn>
+        </router-link>
+        <router-link :to="{name:'galery'}" tag="button">
+          <v-btn text>Galeria</v-btn>
+        </router-link>
+        <router-link :to="{name:'login'}" tag="button" v-if="getLoggedUser().id==-1">
+          <v-btn text>Login</v-btn>
+        </router-link>
+        <v-menu offset-y v-if="getLoggedUser().type==3">
+          <template v-slot:activator="{ on }" @click="checkNewNotifications = false">
+            <v-btn text v-on="on">
+              <span v-if="checkNewNotifications == true">
+                <v-icon color="primary">mdi-bell</v-icon>
+              </span>
+              <span v-if="checkNewNotifications == false">
                 <v-icon>mdi-bell</v-icon>
-              </v-btn>
-            </template>
-            
-            <v-list>
-              <v-list-item v-if="getLoggedUser().type==3" >
-                <v-list-item-title  >
-                    <v-btn text v-if="this.notification === 0">Sem Notificações</v-btn>
-                  <v-btn text v-if="this.notification === 1 && this.qtNotification === 1">Pedido em Análise</v-btn>
-                  <v-btn text v-if="this.notification === 1 && this.qtNotification > 1">Pedidos em Análise</v-btn>
-                  <router-link :to="{name:'myrequests'}" tag="button"> <v-btn text v-if="this.notification === 2">Um ou Mais Pedidos Prontos para Pagamento</v-btn></router-link>
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+              </span>
+            </v-btn>
+          </template>
 
+          <v-list v-if="getLoggedUser().type==3">
+            <v-list-item v-for="notification in notifications" :key="notification.id">
+              <v-list-item-title>
+                <v-btn text v-if="notification.state === 0">Sem Notificações</v-btn>
+                <v-btn
+                  @click="updateNotification(notifications.id)"
+                  text
+                  v-if="notification.state === 1"
+                >O seu pedido do {{notification.serviceName}} encontra-se em Análise</v-btn>
+                <br />
 
+                <router-link :to="{name:'myrequests'}" tag="button">
+                  <v-btn
+                    @click="updateNotification(notifications.id)"
+                    text
+                    v-if="notification.state === 2"
+                  >O seu pedido do {{notification.serviceName}} encontra-se disponivél para Pagamento</v-btn>
+                </router-link>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
-          <v-menu offset-y v-if="getLoggedUser().id!=-1">
-            <template v-slot:activator="{ on }">
-              <v-btn text v-on="on">
-                <v-icon>mdi-account</v-icon>
-                <v-icon>mdi-menu-down</v-icon>
-              </v-btn>
-            </template>
-            
-            <v-list>
-              <v-list-item v-if="getLoggedUser().type==3">
-                <v-list-item-title >
-                  <router-link :to="{name:'profile'}" tag="button"><v-btn text>Perfil</v-btn></router-link>
-                </v-list-item-title>
-              </v-list-item>
-              <v-list-item v-if="getLoggedUser().type==3">
-                <v-list-item-title>
-                  <router-link :to="{name:'myrequests'}" tag="button"><v-btn text>Meus Pedidos</v-btn></router-link>
-                </v-list-item-title>
-              </v-list-item>
-              <v-list-item v-if="getLoggedUser().type==1">
-                <v-list-item-title>
-                 <router-link :to="{name:'user-backoffice'}" tag="button"> <v-btn text>Gestão de Users</v-btn></router-link>
-                </v-list-item-title>
-              </v-list-item> 
-              <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
-                <v-list-item-title>
-                  <router-link :to="{name:'request-backoffice'}" tag="button"> <v-btn text>Gestão de Pedidos</v-btn></router-link>
-                </v-list-item-title>
-              </v-list-item> 
-               <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
-                <v-list-item-title>
-                  <router-link :to="{name:'catalog-backoffice'}" tag="button"><v-btn text>Gestão de Serviços</v-btn></router-link>
-                </v-list-item-title>
-              </v-list-item>
-              <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
-                <v-list-item-title>
-                  <router-link :to="{name:'menus-backoffice'}" tag="button"><v-btn text>Gestão de Menus</v-btn></router-link>
-                </v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>
-                  <router-link :to="{name:'home'}" tag="button"><v-btn text v-on:click="logout()">Log Out</v-btn></router-link>
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-toolbar-items>
-      </v-toolbar>
-    </div>
- 
+        <v-menu offset-y v-if="getLoggedUser().id!=-1">
+          <template v-slot:activator="{ on }">
+            <v-btn text v-on="on">
+              <v-icon>mdi-account</v-icon>
+              <v-icon>mdi-menu-down</v-icon>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item v-if="getLoggedUser().type==3">
+              <v-list-item-title>
+                <router-link :to="{name:'profile'}" tag="button">
+                  <v-btn text>Perfil</v-btn>
+                </router-link>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="getLoggedUser().type==3">
+              <v-list-item-title>
+                <router-link :to="{name:'myrequests'}" tag="button">
+                  <v-btn text>Meus Pedidos</v-btn>
+                </router-link>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="getLoggedUser().type==1">
+              <v-list-item-title>
+                <router-link :to="{name:'user-backoffice'}" tag="button">
+                  <v-btn text>Gestão de Users</v-btn>
+                </router-link>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
+              <v-list-item-title>
+                <router-link :to="{name:'request-backoffice'}" tag="button">
+                  <v-btn text>Gestão de Pedidos</v-btn>
+                </router-link>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
+              <v-list-item-title>
+                <router-link :to="{name:'catalog-backoffice'}" tag="button">
+                  <v-btn text>Gestão de Serviços</v-btn>
+                </router-link>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="(getLoggedUser().type==1||getLoggedUser().type==2)">
+              <v-list-item-title>
+                <router-link :to="{name:'menus-backoffice'}" tag="button">
+                  <v-btn text>Gestão de Menus</v-btn>
+                </router-link>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <router-link :to="{name:'home'}" tag="button">
+                  <v-btn text v-on:click="logout()">Log Out</v-btn>
+                </router-link>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-toolbar-items>
+    </v-toolbar>
+  </div>
 </template>
 
 
 <script>
-//import buttonModalLogin from "./buttonModalLogin";
-//import buttonModalRegister from "./buttonModalRegister";
 export default {
   components: {
-    //buttonModalLogin,
-    //buttonModalRegister
   },
 
   data() {
     return {
-      //loggedUser:this.$store.getters.getLoggedUser,
       notification: 0,
       qtNotification: 0,
       saveNotification: 0,
-      notifications: this.$store.state.notifications
+
+      notifications: null
     };
   },
   beforeCreate: function() {
     this.loggedUser = this.$store.getters.getLoggedUser;
   },
+  created: function() {
+    console.log(this.notification);
+
+    this.notifications = this.$store.getters.getNotifications.filter(
+      notification =>
+        notification.userId === this.$store.getters.getLoggedUser.id
+    );
+  },
+
   updated: function() {
     this.loggedUser = this.$store.getters.getLoggedUser;
   },
-  computed: {},
+  computed: {
+    checkNewNotifications: function() {
+      return this.$store.getters.getNotifications.some(
+        notification =>
+          notification.new == true
+      );
+    }
+  },
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
@@ -124,17 +164,12 @@ export default {
     getLoggedUser() {
       return this.$store.getters.getLoggedUser;
     },
-    checkNotification() {
-      console.log(this.notification)
-      for (let i = 0; i < this.notifications.length; i++) {
-  
-        if(this.notifications[i].userId == this.loggedUser.id) {
-          this.qtNotification = this.qtNotification + 1
-          this.notification = this.notifications[i].state
-          console.log(this.qtNotification)
-        }  
-      }
-      
+
+    updateNotification(id) {
+      this.notifications = this.notifications.filter(
+        notification => notification.id !== id
+      );
+      this.$store.state.notifications = this.notifications;
     }
   }
 };

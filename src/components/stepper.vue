@@ -334,11 +334,13 @@ export default {
         });
 
         this.$store.commit("UPDATENOTIFICATION", {
+          id: this.$store.getters.getNotificationLastId,
           userId: this.$store.getters.getLoggedUser.id,
           userName: this.$store.getters.getLoggedUser.username,
           state: 1,
           serviceName: this.selectedService.name,
-          menuName: this.selectedMenu.name
+          menuName: this.selectedMenu.name,
+          new: true
         });
 
         Swal.fire({
