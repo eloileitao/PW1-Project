@@ -109,8 +109,8 @@ export default {
       valid: true,
       
       emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
+        v => !!v || 'E-mail é obrigatorio ',
+        v => /.+@.+/.test(v) || 'E-mail deve ser valido',
       ],
     };
   },
