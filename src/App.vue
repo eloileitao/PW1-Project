@@ -36,9 +36,13 @@ export default {
       "notifications",
       JSON.stringify(this.$store.state.notifications)
     );
+    localStorage.setItem(
+      "loggedUser",
+      JSON.stringify(this.$store.state.loggedUser)
+    );
   },
   created() {
-      window.addEventListener(
+    window.addEventListener(
       "beforeunload",
       () => {
         //update Local Storage Users
@@ -65,48 +69,59 @@ export default {
           "notifications",
           JSON.stringify(this.$store.state.notifications)
         );
+        localStorage.setItem(
+          "loggedUser",
+          JSON.stringify(this.$store.state.loggedUser)
+        );
       },
       false
-    );  
+    );
 
     //efetuar se as varias veis estao no local storage para as atualizar na store
     if (localStorage.getItem("users") != null) {
       //
       this.$store.state.users = JSON.parse(localStorage.getItem("users"));
-      
+
       console.log("Created function: set local Users in store");
     }
     if (localStorage.getItem("menus") != null) {
       //
-      this.$store.state.menus=JSON.parse(localStorage.getItem("menus"));
-      
+      this.$store.state.menus = JSON.parse(localStorage.getItem("menus"));
+
       console.log("Created function: set local Menus in store");
     }
     if (localStorage.getItem("services") != null) {
       //
-      this.$store.state.services=JSON.parse(localStorage.getItem("services"));
-      
+      this.$store.state.services = JSON.parse(localStorage.getItem("services"));
+
       console.log("Created function: set local Services in store");
     }
     if (localStorage.getItem("requests") != null) {
       //
-      this.$store.state.requests=JSON.parse(localStorage.getItem("requests"));
-      
+      this.$store.state.requests = JSON.parse(localStorage.getItem("requests"));
+
       console.log("Created function: set local Requests in store");
     }
     if (localStorage.getItem("reviews") != null) {
       //
-      this.$store.state.reviews=JSON.parse(localStorage.getItem("reviews"));
-      
+      this.$store.state.reviews = JSON.parse(localStorage.getItem("reviews"));
+
       console.log("Created function: set local Reviews in store");
     }
     if (localStorage.getItem("notifications") != null) {
       //
-      this.$store.state.notifications=JSON.parse(localStorage.getItem("notifications"));
-      
+      this.$store.state.notifications = JSON.parse(
+        localStorage.getItem("notifications")
+      );
+
       console.log("Created function: set local Notifications in store");
     }
-    
+    if (localStorage.getItem("loggedUser") != null) {
+      //
+      this.$store.state.loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+      console.log("Created function: set local loggedUser in store");
+    }
   }
 };
 </script>
