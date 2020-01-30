@@ -40,6 +40,10 @@ export default {
       "loggedUser",
       JSON.stringify(this.$store.state.loggedUser)
     );
+     localStorage.setItem(
+          "rewards",
+          JSON.stringify(this.$store.state.rewards)
+        );
   },
   created() {
     window.addEventListener(
@@ -73,6 +77,11 @@ export default {
           "loggedUser",
           JSON.stringify(this.$store.state.loggedUser)
         );
+        localStorage.setItem(
+          "rewards",
+          JSON.stringify(this.$store.state.rewards)
+        );
+         
       },
       false
     );
@@ -121,6 +130,12 @@ export default {
       this.$store.state.loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
       console.log("Created function: set local loggedUser in store");
+    }
+    if (localStorage.getItem("rewards") != null) {
+      //
+      this.$store.state.rewards = JSON.parse(localStorage.getItem("rewards"));
+
+      console.log("Created function: set local rewards in store");
     }
   }
 };

@@ -22,14 +22,17 @@
           <v-spacer></v-spacer>
           <v-spacer></v-spacer>
           <v-card-text>
-            <v-form class="flex mb-0">
-              <v-text-field label="Username" prepend-icon="person" type="text" v-model="username"></v-text-field>
+            <v-form class="flex mb-0" v-model="valid">
+              <v-text-field label="Username" prepend-icon="person" type="text" v-model="username"  required></v-text-field>
               <v-text-field
+              
                 label="Email"
                 name="email"
                 prepend-icon="mail"
                 type="email"
                 v-model="email"
+                :rules="emailRules"
+                required
               ></v-text-field>
               <v-text-field
                 id="password"
@@ -37,6 +40,7 @@
                 prepend-icon="lock"
                 type="password"
                 v-model="password"
+                 required
               ></v-text-field>
 
               <v-text-field
@@ -46,6 +50,7 @@
                 prepend-icon="lock"
                 type="password"
                 v-model="confirmarPassword"
+                 required
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -54,7 +59,7 @@
             <v-col cols="auto" class="text-center pl-0">
               <v-row class="flex-column ma-0 fill-height justify-center">
                 <v-col>
-                  <v-btn v-on:click="registo()" color="primary">Register</v-btn>
+                  <v-btn :disabled="!valid" v-on:click="registo()" color="primary">Register</v-btn>
                 </v-col>
                 <v-col>
                   <v-btn dark>
@@ -100,7 +105,13 @@ export default {
       confirmarPassword: "",
       email: "",
       users:null,
-      emailCheck:true
+      emailCheck:true,
+      valid: true,
+      
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ],
     };
   },
   created(){
