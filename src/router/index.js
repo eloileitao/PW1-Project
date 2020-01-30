@@ -14,12 +14,24 @@ import UserBackOffice from "@/views/BackOffice/User.vue"
 import RequestsBackOffice from "@/views/BackOffice/Requests.vue"
 import CatalogBackOffice from "@/views/BackOffice/CatalogManager.vue"
 import MenusBackOffice from "@/views/BackOffice/Menus.vue"
+import ErrorPage from "@/views/ErrorPage.vue";
+import ErrorPageUserInvalid from "@/views/ErrorPageLoggedUser.vue"
 //import LogIn from "@/components/buttonModalLogin.vue"
 import store from "../store";
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/errorPage",
+    name: "errorPage",
+    component: ErrorPage
+  },
+  {
+    path: "/errorPageInvalidUser",
+    name: "errorPageInvalidUser",
+    component: ErrorPageUserInvalid
+  },
   {
     path: "/",
     name: "home",
@@ -75,7 +87,7 @@ const routes = [
       if(store.state.loggedUser.id== 0){
         next()
       }else{
-        next("/");
+        next("/errorPageInvalidUser");
       }
     }
    },
@@ -87,7 +99,7 @@ const routes = [
       if(store.state.loggedUser.id== 0){
         next()
       }else{
-        next("/");
+        next("/errorPageInvalidUser");
       }
     }
    },
@@ -99,7 +111,7 @@ const routes = [
       if(store.state.loggedUser.id== 0){
         next()
       }else{
-        next("/");
+        next("/errorPageInvalidUser");
       }
     }
    },
@@ -116,7 +128,7 @@ const routes = [
       if(store.state.loggedUser.id!= -1){
         next()
       }else{
-        next("/");
+        next("/errorPageInvalidUser");
       }
     }
    },
@@ -133,7 +145,7 @@ const routes = [
       if(store.state.loggedUser.id!= -1){
         next()
       }else{
-        next("/");
+        next("/errorPageInvalidUser");
       }
     }
    },
@@ -144,7 +156,12 @@ const routes = [
    /* children: [
       { path: '', component: UserHome },
     ]*/
-   }
+   },
+   {
+    path: '*',
+    name:'404', 
+    component: ErrorPage
+}
 ];
 
 const router = new VueRouter({
