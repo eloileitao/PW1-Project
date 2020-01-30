@@ -98,8 +98,13 @@ export default {
       username: "",
       password: "",
       confirmarPassword: "",
-      email: ""
+      email: "",
+      users:null,
+      emailCheck:true
     };
+  },
+  created(){
+    this.users=this.$store.getters.getUsers;
   },
   computed: {},
   mounted() {
@@ -107,9 +112,44 @@ export default {
   },
   methods: {
     registo() {
-      if (this.confirmarPassword == this.password) {
+      this.emailCheck=true;
+      for(let i=0;i<this.users.length;i++)
+      {
+       if( this.users[i].email==this.email){
+          this.emailCheck=false
+       }
+      
+      }
+      if( this.emailCheck!=true){
+        Swal.fire({
+          title: "Email ja esta a ser utilizado",
+         icon: "error"
+         })
+
+      }
+      if (this.confirmarPassword != this.password) {
+        // this.$store.commit("REGISTER", {
+        //   id: this.$store.getters.getLastId,
+        //   username: this.username,
+        //   password: this.password,
+        //   email: this.email,
+        //   foto: "",
+        //   type: 3
+        // });
+        // Swal.fire({
+        //   title: "Utilizador criado com sucesso!",
+        //   icon: "success"
+        // }).then(this.$router.push({name:"login"}));
+      
+        Swal.fire({
+          title: "Palavras passe nao coincidem!",
+         icon: "error"
+         })
+      }
+      if(this.confirmarPassword == this.password && this.emailCheck==true){
         this.$store.commit("REGISTER", {
           id: this.$store.getters.getLastId,
+
           username: this.username,
           password: this.password,
           email: this.email,
@@ -120,8 +160,7 @@ export default {
           title: "Utilizador criado com sucesso!",
           icon: "success"
         }).then(this.$router.push({name:"login"}));
-      } else {
-        alert("Palavras passe nao coincidem");
+
       }
     }
   }
