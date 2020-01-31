@@ -300,8 +300,8 @@ export default {
               
               this.loggedUser.points =
                 this.loggedUser.points +
-                this.loggedUser.rewards.achievements[2].points;
-              this.loggedUser.rewards.achievements[2].available = false;
+                this.loggedUser.rewards.achievements[4].points;
+              this.loggedUser.rewards.achievements[4].available = false;
               console.log(this.loggedUser);
 
               this.$store.state.loggedUser = this.loggedUser;

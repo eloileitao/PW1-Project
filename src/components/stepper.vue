@@ -365,6 +365,28 @@ export default {
     this.$store.state.users=this.users;
     console.log(this.users);
   }
+  if (this.loggedUser.rewards.achievements[3].available == true && this.loggedUser.rewards.achievements[3].progress != 100){
+              this.loggedUser.rewards.achievements[3].progress += 10;
+            }
+            
+            else if (this.loggedUser.rewards.achievements[3].available == true && this.loggedUser.rewards.achievements[3].progress == 100) {
+              
+              this.loggedUser.points =
+                this.loggedUser.points +
+                this.loggedUser.rewards.achievements[3].points;
+              this.loggedUser.rewards.achievements[3].available = false;
+              console.log(this.loggedUser);
+
+              this.$store.state.loggedUser = this.loggedUser;
+
+              for (let i = 0; i < this.users; i++) {
+                if (this.loggedUser.id == this.users[i].id) {
+                  this.users[i] = this.loggedUser;
+                }
+              }
+              this.$store.state.users = this.users;
+              console.log(this.users);
+            }
 
    
         Swal.fire({
